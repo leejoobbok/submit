@@ -1,0 +1,233 @@
+/* @charset "UTF-8"; */
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
+
+li {list-style-type: none;}
+
+.line1 {
+	width: 59%;
+	border: 1.3px solid black;
+	margin: auto;
+	margin-bottom: 30px;
+}
+
+.line2 {
+	width: 56%;
+	border: 0.3px solid #9c9c9c;
+	margin: auto;
+}
+
+.articleArea {
+	padding-left: 25%;
+}
+
+.endRecruitDay {
+    font-family: 'SUITE-Regular';
+    font-size: 12pt;
+    color: gray;
+    margin-top: 40px;
+	margin-left: -15px;
+	
+}
+
+.title {
+    font-family: 'SUITE-Regular';
+    line-height: 5px;
+	margin-left: -15px;
+}
+
+.prjPeriod {
+	margin-left: 15px;
+	margin-bottom: 45px;
+    line-height: 40px;
+    font-size: 17px;
+}
+
+.smallTitle {
+    font-family: 'SUITE-Regular';
+	margin-left: 25%;
+	margin-bottom: 5px;
+}
+
+.positionList {
+	line-height: 25px;
+	font-size: 17px;
+}
+
+.positionName {
+	margin-left: -30px;
+    font-family: 'SUITE-Regular';
+	width: 120px;
+	display: inline-block;
+}
+
+.positionNumber {
+    font-family: 'SUITE-Regular';
+	display: inline-block;
+}
+
+.recrutor {
+	font-family: 'SUITE-Regular';
+	text-align: center;
+	margin-left: 30%;
+	margin-bottom: 7px;
+	margin-top: -25px;
+}
+
+.recruitContent, .recruitTools, .recruitDoType, .recruitRegion {
+    font-family: 'SUITE-Regular';
+    font-size: 13pt;
+    margin-top: 5px;
+    margin-left: 2px;
+    margin-bottom: 50px;
+	
+}
+
+.recruitContent {
+	padding-right: 35%;
+}
+
+.toolTag {
+    font-family: 'SUITE-Regular';
+	font-size: 12pt;
+	font-weight: 500;
+}
+
+.applyArea {
+	padding-left: 25%;
+	display: inline-block;
+	gap: 10px;
+	margin-left: -30px;
+}
+
+.position, .recruiting, .completed {
+    font-family: 'SUITE-Regular';
+	width: 170px;
+	display: inline-block;
+	line-height: 30px;
+	font-size: 15pt;
+}
+
+.completed {
+	color: red;
+}
+
+.applyBtn {
+    font-family: 'SUITE-Regular';
+	width: 100px;
+	display: inline-block;
+	font-size: 12pt;
+	background-color: #ffcd29;
+	border: none;
+	border-radius: 12px;
+}
+
+.unavailableBtn {
+    font-family: 'SUITE-Regular';
+	width: 100px;
+	display: inline-block;
+	font-size: 12pt;
+	background-color: #757575;
+	color: white;
+	border: none;
+	border-radius: 12px;
+	
+}
+
+.replyArea {
+	padding-left: 21%;
+}
+
+.replyTitle {
+    font-family: 'SUITE-Regular';
+	margin-left: 25%;
+	margin-bottom: 5px;
+	margin-top: 60px;
+}
+
+.line3 {
+	width: 63%;
+	border: 0.3px solid #9c9c9c;
+	margin: auto;
+}
+
+.replyUser {
+	font-size: 12pt;
+	font-family: 'SUITE-Regular';
+}
+
+.replyContent {
+	width: 61%;
+	font-size: 11pt;
+	font-family: 'SUITE-Regular';
+	line-height: 30px;
+	resize: none;
+	
+	border: none;
+}
+
+.replyArea ul li hr {
+	margin: 0;
+	margin-left: -20px;
+	margin-top: 8px;
+	
+	width: 70%;
+}
+
+.applyInsertArea {
+	margin-top: 25px;
+	margin-bottom: 60px;
+	padding-left: 23%;
+	padding-right: 30%;
+}
+
+.replyInsertContent {
+	width: 100%;
+	font-size: 11pt;
+	font-family: 'SUITE-Regular';
+	resize: none;
+	padding: 8px 3px 8px 3px;
+}
+
+.replyBtn {
+    font-family: 'SUITE-Regular';
+	width: 100px;
+	height: 25px;
+	font-size: 12pt;
+	background-color: #ffcd29;
+	border: none;
+	border-radius: 4px;
+	margin-left: 0px;
+}
+
+.etcBtnBox {
+	margin: auto;
+	text-align: center;
+	margin-top: 55px;
+}
+
+.reportBtn, .removeBtn {
+	font-size: 12pt;
+	width: 100px;
+	height: 30px;
+	background-color: #dfdfdf;
+	border: none;
+	border-radius: 7px;
+}
+
+.reportBtn:hover, .removeBtn:hover {
+	background-color: #717171;
+	color: white;
+}
+
+
+
+
+

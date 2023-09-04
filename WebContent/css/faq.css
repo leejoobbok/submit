@@ -1,0 +1,167 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+a {text-decoration: none;}
+
+.btnHeight {
+	border-right: 3px solid black;
+}
+
+#faqButton, #qnaButton {
+	text-align: left;
+	width: 100px;
+}
+
+.listsDiv {
+	width: 700px;
+	margin-left: 50px;
+}
+
+.faqListTitle {
+    font-family: 'SUITE-Regular';
+	font-size: 15pt;
+}
+
+.titleText1 {
+    font-family: 'SUITE-Regular';
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+.listsDiv {
+	display: inline-block;
+	width: 800px;
+	margin-top: 30px;
+	margin-left: 30px;
+    font-family: 'SUITE-Regular';
+}
+
+.faqListContent, .faqListTitle {
+	display: inline-block;
+	font-size: 13pt;
+	font-weight: bold;
+    font-family: 'SUITE-Regular';
+    text-align: center;
+    height: 25px;
+}
+
+.faqListTitle {
+	width: 100px;
+}
+
+.faqListContent {
+	width: 590px;
+}
+
+.faqNumContent, .faqTitleContent {
+	display: inline-block;
+    font-family: 'SUITE-Regular';
+    height: 21px;
+	
+}
+
+.faqNumContent {
+	font-size: 11pt;
+    text-align: center;
+	width: 100px;
+}
+
+.faqTitleContent {
+	font-size: 12pt;
+	margin-left: 30px;
+	width: 560px;
+}
+
+.faqTitleContent a:hover {
+	font-weight: bold;
+}
+
+.tableLine1 {
+	border: 2px solid black;
+}
+
+.tableLine2 {
+	border: 0.5px solid lightgray;
+	width: 98%
+}
+
+.paging {
+	text-align: center;
+	margin-left: -300px;
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+.paging span {
+	font-size: 14pt;
+    font-family: 'SUITE-Regular';
+}
+
+.articleDiv {
+	width: 800px;
+	margin-top: 30px;
+	margin-left: 30px;
+}
+
+.faqArticleNum, .faqArticleTitle, .faqArticleNum2, .faqArticleTitle2 {
+    font-family: 'SUITE-Regular';
+    font-size: 14pt; 
+	display: inline-block;
+	height: 30px;
+	padding-top: 5px;
+}
+
+.faqArticleNum, .faqArticleTitle {
+	width: 9%;
+	text-align: center;
+	font-weight: bold;
+}
+
+.faqArticleNum2 {
+	width: 9%;
+}
+
+.faqArticleTitle2 {
+	width: 70%;
+}
+
+.faqArticleContent, .faqArticleContent2 {
+	display: inline-block;
+    font-family: 'SUITE-Regular';
+    font-size: 14pt;
+	height: 300px;
+	padding-top: 10px;
+}
+
+.faqArticleContent {
+	width: 9%;
+	text-align: center;
+	font-weight: bold;
+	
+}
+
+.faqArticleContent2 {
+	width: 89%;
+	
+}
+
+#returnList {
+    font-family: 'SUITE-Regular';
+    font-size: 14pt; 
+	width: 110px;
+	height: 32px;
+	border: none;
+	border-radius: 5px;
+	background-color: #ffdd9d;
+}
+
+#returnList:hover {
+	background-color: orange;
+	color: white;
+}

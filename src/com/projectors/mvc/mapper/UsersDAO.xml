@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.IUsersDAO">
+
+	<!-- 관리자 페이지 관련 -->
+	<select id="list" resultType="com.projectors.mvc.dto.UsersDTO">
+		SELECT UP.PIN_NO AS pinNo
+		    , USER_NO AS userNo
+		    , ID AS userId
+		    , NICKNAME AS nickname
+		    , UP.JOIN_DATE AS joinDate
+		FROM USERS U
+		RIGHT JOIN USER_PIN UP
+		ON U.PIN_NO = UP.PIN_NO
+	</select>
+	
+	<select id="searchId" resultType="com.projectors.mvc.dto.UsersDTO">
+		SELECT UP.PIN_NO AS pinNo
+		    , USER_NO AS userNo
+		    , ID AS userId
+		    , NICKNAME AS nickName
+		    , UP.JOIN_DATE AS joinDate
+		FROM USERS U
+		RIGHT JOIN USER_PIN UP
+		ON U.PIN_NO = UP.PIN_NO
+		WHERE U.ID LIKE '%' || #{userId} || '%'
+	</select>
+	
+	<select id="searchNickname" resultType="com.projectors.mvc.dto.UsersDTO">
+		SELECT UP.PIN_NO AS pinNo
+		    , USER_NO AS userNo
+		    , ID AS userId
+		    , NICKNAME AS nickName
+		    , UP.JOIN_DATE AS joinDate
+		FROM USERS U
+		RIGHT JOIN USER_PIN UP
+		ON U.PIN_NO = UP.PIN_NO
+		WHERE U.NICKNAME LIKE '%' || #{nickname} || '%'
+	</select>
+	
+	
+	
+	<!-- 유저 페이지 관련 -->	
+	<select id="checkId" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM IDCHECK
+		WHERE ID=#{userId}
+	</select>
+	
+	<select id="checknickname" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM USERS
+		WHERE NICKNAME=#{nickname}
+	</select>
+		
+	<insert id="addPin">
+		INSERT INTO USER_PIN
+		( PIN_NO
+		, JOIN_DATE)
+		VALUES
+		( 'UP'||TO_CHAR(USERPINSEQ.NEXTVAL)
+ 		, SYSDATE)
+	</insert>
+ 
+	<select id="getPinNo" resultType="java.lang.String">
+			SELECT PIN_NO AS PINNO
+		   FROM (SELECT PIN_NO
+ 		         FROM USER_PIN
+ 		         ORDER BY JOIN_DATE DESC)
+		   WHERE ROWNUM = 1
+	</select>
+ 
+	<insert id="addUsers" >
+		INSERT INTO USERS
+		( USER_NO
+		, PIN_NO
+		, ID
+		, PW
+		, NICKNAME )
+		VALUES
+		( 'US'||TO_CHAR(USERNOSEQ.NEXTVAL)
+		,(SELECT PIN_NO
+		   FROM (SELECT PIN_NO
+ 		         FROM USER_PIN
+ 		         ORDER BY JOIN_DATE DESC)
+		   WHERE ROWNUM = 1)
+		,#{userId}
+		,#{userPw}
+		,#{nickname})
+	</insert>
+	
+	<select id="getPhotourl" resultType="java.lang.String">
+		SELECT PHOTOURL
+		FROM USERS
+		WHERE PIN_NO=#{pinNo}
+	
+	</select>
+	
+	
+	<update id="removePhoto">
+		UPDATE USERS
+		SET PHOTOURL='images/defaulfPhoto.jpg'
+		WHERE PIN_NO=${pinNo}	
+	</update>
+  
+  
+  	<update id="updatePhoto">
+  		UPDATE USERS
+  		SET PHOTOURL=${photourl}
+  		WHERE PIN_NO=${pinNo}
+  	</update>
+  
+</mapper>

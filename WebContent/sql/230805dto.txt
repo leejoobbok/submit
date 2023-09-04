@@ -1,0 +1,240 @@
+====================
+=DTO 구성=
+usersDTO    -> 유저 정보를 다룸 (탈퇴 회원)
+
+profileDTO  -> 프로필 정보를 다룸 + rateDTO 내용
+recruitDTO  -> 공고 정보를 다룸
+applyDTO    -> 지원 정보를 다룸
+projectDTO  -> 프로젝트 관련 정보를 다룸 + rateDTO 내용
+qnaDTO      -> QnA 정보를 다룸
+faqDTO      -> FAQ 정보를 다룸
+messageDTO  -> 쪽지 정보를 다룸
+reportDTO   -> 게시물 신고 관련 정보를 다룸
+adminDTO    -> 관리자 기능 관련 정보를 다룸 (비활성화 관리자)
+MyPageDTO ->
+pickDTO ->
+
+
+=DAO 구성=
+usersDAO   ==> 이준복  
+profileDAO ==> 이준복 
+recruitDAO ==> 진주연        
+applyDAO   ==> 진주연
+
+projectDAO ==> 
+
+qnaDAO     ==> 한아현
+faqDAO     ==> 한아현
+reportDAO  ==> 진주연
+adminDAO   ==> 주수인
+
+MyPageDAO ==> 이준복
+==================================
+
+=@컨트롤러 구성=
+usersController
+profileController
+recruitController
+applyController
+projectController
+qnaController
+faqController
+reportController
+adminController
+
+================================================================
+<userDTO>
+userNo 회원번호
+pinNo 회원 식별 번호
+id 회원 아이디
+pw 회원 비밀번호
+nickName 회원 닉네임
+
+<profileDTO>
+profileNo 프로필 번호
+pinNo     회원식별 번호
+id	  아이디
+nickName  닉네임
+posNo     희망 포지션 번호
+posName   포지션 이름
+
+toolNo   도구번호
+toolName 도구명 
+userToolNo 사용자 도구 번호
+regionNo   지역번호
+regionName 지역명
+subRegionNo 세부지역번호
+subRegionName 세부지역명
+doTypeNo     진행방식번호
+doTypeName   진행방식명
+
+<recruitDTO>
+recruitNo 모집 공고 번호
+recuitTitle 모집 공고 타이틀
+recruitPinNo 모집자 회원 식별 번호
+recuritPosNo? 모집 포지션 번호?
+posNo 포지션 번호
+posName 포지션명
+recruitEnd 모집마감일
+projectStart 프로젝트 시작일
+projectEnd 프로젝트 마감일
+dDay 마감일 d-day 계산
+frontCount 모집할  총 프론트엔드 인원
+backCount 모집할  총 백엔드 인원
+fullCount 모집할  총 풀스택 인원
+publishCount 모집할  총 퍼블리셔 인원
+designCount 모집할 총 디자인 인원
+planCount 모집할 총 기획 인원
+passFrontCount, passBackCount, passFullCount
+passPublishCount, passDesignCount, passPlanCount
+--> 모집 완료된 각 파트 인원
+recruitContent 모집 공고 내용
+[
+recruitUToolNo 모집 공고 도구 번호 
+toolNo 도구 번호
+toolName 도구명 
+doTypeNo 진행방식 번호
+doTypeName 진행방식 이름
+recruitCommNo 댓글 번호
+recruitComm 댓글
+recruitCommPinNo 댓글 작성자 핀번호
+recruiCommcontent 댓글 작성자 내용
+recruitParentCommNo 원 댓글 번호 
+]
+
+applyingFrontCount 
+applyingBackCount
+applyingFullCount
+applyingPublishCount
+applyingDesignCount
+applyingPlanCount
+--> 지원인원 수
+
+commCount
+--> 댓글 수
+
+pickRecruitNo 찜 공고?
+
+
+<applyDTO>
+recruitNo 모집 공고 번호
+(applyNo  지원서 번호) 
+applyPinNo 지원자 식별 번호
+applyNickName 지원자 닉네임
+PositionNo 포지션 번호
+PositionName 포지션명
+applyDate 지원 날짜 
+Result 1차 결과
+Content 지원서 내용
+
+
+
+<projectDTO>
+projectNo		프로젝트 번호
+projectTitle		프로젝트명
+projectMemberNo 	프로젝트 멤버 번호
+projectMemberPosition	프로젝트 멤버 포지션
+feedNo			피드 번호
+feedContent		피드 내용
+projectNoticeNo		프로젝트 공지 번호
+projectNoticeTitle	프로젝트 공지 제목
+projectNoticeContent	프로젝트 공지 내용
+noticeCreatedDate	프로젝트 공지 등록일
+workspaceTitle		워크 스페이스 글 제목
+workspaceContent	워크 스페이스 내용
+workspaceCreatedDate	워크 스페이스 게시물 등록일
+meetingTitle   	 	회의록 제목
+meetingContent		회의록 내용
+meetingFile		회의록 파일 
+meetingCreatedDate 	회의록 등록일
+meetingDate		회의 날짜
+projectStart		프로젝트 시작일
+projectEnd		프로젝트 종료일
+memOutNo		이탈 멤버 번호
+projectStopNo           프로젝트 중단 번호
+
+<qnaDTO>
+questionNo 		문의 번호
+questionPinNo 		문의자 회원 식별 번호
+questionContent 	문의 내용
+quesstionCreatedDate 	문의 등록일
+answer			답변 번호
+answerPinNo   		답변자(관리자) 식별 번호
+answerContent 		답변 내용
+
+<faqDTO>
+faqNo    faq 		번호
+title    faq 		게시물 제목
+content  faq 		게시물 내용
+
+<mssengerDTO>
+sendPinNo  		발신자 식별 번호
+sendNickName   		 발신자 닉네임
+receiverPinNo   	수신자 식별 번호
+receiverNickName 	수신자 닉네임
+content         	쪽지 내용
+date            	발신일
+
+
+<reportDTO>
+repNo		 신고 번호
+repPinNo 	 신고자 식별 번호
+prepPinNo ?	 피신고자 식별 번호 ?
+repReason 	 신고 사유
+repResult	 신고 처리 결과
+repDate          신고 날짜
+reguNo 		 제재 번호
+reguPeriodNo     제재 기간
+reguDate    	 제재 날짜
+adminPin	 처리 관리자 번호
+
+<adminDTO>
+adminPinNo	관리자 식별 번호
+
+userPinNo	 유저 식별 번호
+userId		 유저 아이디
+userNickName	 유저 닉네임
+userRegistDate   유저 가입일
+
+loginLogNo 	 로그인 로그 번호
+loginDate	 로그인 일시
+logoutLogNo	 로그아웃 로그 번호
+logoutDate	 로그아웃 일시
+
+projectNo        프로젝트 번호
+projectTitle	 프로젝트 타이틀
+projectPinNo	 프로젝트 팀장 식별 번호
+projectCreatedDate 프로젝트 생성일
+
+recruitNo	공고 번호
+recuitPinNo	공고 
+recruitTitle	공고 제목
+recruitCreatedDate 공고 등록일
+		
+applyNo		지원서 번호
+applyPinNo	지원자 식별 번호
+applyCreatedDate 지원서 제출일
+
+questionPinNo	질문자 식별 번호
+questionNo	질문 번호
+questionCreatedDate	질문 등록일
+answerPinNo	답변자(관리자 식별 번호)
+answerNo	답변 번호
+answerCreatedDate 답변 등록일
+
+faqNo		faq 번호
+faqTitle	faq 제목
+
+repNo		신고 번호
+repPinNo	신고자 식별 번호
+prepPinNo ?	피신고자 식별 번호
+
+
+
+
+
+
+
+
+
+

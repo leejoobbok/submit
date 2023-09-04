@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.IAdminDAO">
+
+
+<select id="todayMemberCnt" resultType="java.lang.Integer">
+	SELECT COUNT(*) AS COUNT
+	FROM LOGIN_REC
+	WHERE TO_CHAR(LOGIN_DATE, 'YYYY-MM-DD')=TO_CHAR(SYSDATE,'YYYY-MM-DD')
+</select>
+
+
+
+<select id="newReportCnt" resultType="java.lang.Integer">
+  SELECT
+  (
+    SELECT COUNT(CASE WHEN RCR.REGU_DATE IS NULL THEN 1 END) AS NULL_COUNT
+    FROM REP_COMM_RESULT RCR
+    RIGHT JOIN REPORT_COMM RC
+    ON RCR.REP_COMM_NO = RC.REP_COMM_NO
+  ) +
+  (
+    SELECT COUNT(CASE WHEN RAR.REGU_DATE IS NULL THEN 1 END) AS NULL_COUNT
+    FROM REP_APPLY_RESULT RAR
+    RIGHT JOIN REPORT_APPLY RA
+    ON RAR.REP_APPLY_NO = RA.REP_APPLY_NO
+  ) +
+  (
+    SELECT COUNT(CASE WHEN RRR.REGU_DATE IS NULL THEN 1 END) AS NULL_COUNT
+    FROM REP_RECRUIT_RESULT RRR
+    RIGHT JOIN REP_RECRUIT RR
+    ON RRR.REP_RECRUIT_NO = RR.REP_RECRUIT_NO
+  ) +
+  (
+    SELECT COUNT(CASE WHEN RNR.REGU_DATE IS NULL THEN 1 END) AS NULL_COUNT
+    FROM REP_NOTE_RESULT RNR
+    RIGHT JOIN REPORT_NOTE RN
+    ON RNR.REP_NOTE_NO = RN.REP_NOTE_NO
+  ) AS newReportCnt
+  FROM DUAL
+</select>
+
+<select id="newQuestionCnt" resultType="java.lang.Integer">
+	SELECT COUNT(CASE WHEN A.CREATED_DATE IS NULL THEN 1 END)AS newQuestionCnt
+	FROM QUESTION Q
+	LEFT JOIN ANSWER A
+	ON Q.QUESTION_NO = A.QUESTION_NO
+</select>
+
+</mapper>

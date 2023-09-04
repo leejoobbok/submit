@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.IRecruitDAO">
+
+	<select resultType="com.projectors.mvc.dto.RecruitDTO" id="lists">
+	<!-- 
+		SELECT RECRUITNO, PINNO, DEADLINEDATE, DDAY, PRJSTART, PRJEND, TITLE, CONTENT
+		        , DOTYPENAME, REGIONNAME, SUBREGIONNAME
+		FROM RECRUITVIEW
+		WHERE DDAY >= 0
+	 -->
+	 	SELECT RECRUITNO, PINNO, DEADLINEDATE, DDAY, PRJSTART, PRJEND, TITLE, CONTENT
+        	, DOTYPENAME, REGIONNAME, SUBREGIONNAME
+		FROM RECRUITVIEW
+		WHERE DDAY >= 0
+		  AND REGIONNAME LIKE '%%'
+		  AND SUBREGIONNAME LIKE '%%'
+		  AND RECRUITNO IN (SELECT RECRUIT_NO
+		                    FROM RECRUIT_POS 
+		                    WHERE POS_NO LIKE '%%')
+		  AND DOTYPENAME LIKE '%%'
+		ORDER BY DDAY DESC
+	</select>
+	<!-- 
+	<select resultType="com.projectors.mvc.RecruitDTO" id="searchLists">
+		SELECT RECRUITNO, PINNO, DEADLINEDATE, DDAY, PRJSTART, PRJEND, TITLE, CONTENT
+        , DOTYPENAME, REGIONNAME, SUBREGIONNAME
+		FROM RECRUITVIEW
+		WHERE DDAY >= 0
+		  AND REGIONNAME LIKE '%' || #{regionName }
+		  AND SUBREGIONNAME LIKE '%' || #{subRegionName }
+		  AND RECRUITNO IN (SELECT RECRUIT_NO
+		                    FROM RECRUIT_POS 
+		                    WHERE POS_NO LIKE '%' || #{posNo })
+		  AND DOTYPENAME LIKE '%' || #{doTypeName }
+	</select>
+	 -->
+	<select resultType="java.lang.String" id="showTool">
+		SELECT TOOL_NAME
+		FROM TOOL
+		WHERE TOOL_NO IN (SELECT TOOL_NO
+		                 FROM RECRUIT_TOOL
+		                 WHERE RECRUIT_NO = #{recruitNo })
+	</select>
+	
+	<select resultType="com.projectors.mvc.dto.RecruitDTO" id="countRecruitMember">
+		SELECT SUM(COUNTALL) AS COUNTALL
+		     , SUM(COUNTPOS) AS COUNTPOS
+		     , RECRUITNO
+		FROM RECRUITPOSITIONVIEW
+		WHERE RECRUITNO LIKE '%' || #{recruitNo }
+		GROUP BY RECRUITNO
+	</select>
+	
+	<select resultType="com.projectors.mvc.dto.RecruitDTO" id="optionRegion">
+		SELECT REGION_NAME AS REGIONNAME
+			 , REGION_NO AS REGIONNO
+		FROM REGION
+	</select>
+	
+	<select resultType="com.projectors.mvc.dto.RecruitDTO" id="optionDoType">
+		SELECT DO_TYPE_NAME AS DOTYPENAME
+			 , DO_TYPE_NO AS DOTYPENO
+		FROM DO_TYPE
+	</select>
+	
+	<select resultType="com.projectors.mvc.dto.RecruitDTO" id="optionPos">
+		SELECT POS_NAME AS POSNAME
+			 , POS_NO AS POSNO
+		FROM POSITION
+	</select>
+	
+	<select resultType="java.lang.String" id="subRegionList">
+		SELECT SUB_REGION_NAME
+		FROM SUB_REGION
+		WHERE REGION_NO = #{regionNo }
+	</select>
+	
+	<select resultType="com.projectors.mvc.dto.RecruitDTO" id="article">
+		SELECT RECRUITNO, PINNO, NICKNAME, DEADLINEDATE, DDAY, PRJSTART, PRJEND, TITLE, CONTENT
+		     , DOTYPENAME, REGIONNAME, SUBREGIONNAME
+		FROM RECRUITVIEW
+		WHERE RECRUITNO = #{regionNo }
+	</select>
+	
+	<select resultType="com.projectors.mvc.dto.RecruitDTO" id="countPosRecruitMember">
+		SELECT SUM(COUNTALL) AS COUNTALL
+		     , SUM(COUNTPOS) AS COUNTPOS
+		     , POSNAME
+		FROM RECRUITPOSITIONVIEW 
+		WHERE RECRUITNO = #{regionNo }
+		GROUP BY POSNAME
+	</select>
+	
+	<select resultType="com.projectors.mvc.dto.RecruitDTO" id="recruitMember">
+		SELECT RECRUITPOSNO, POSNAME, COUNTPOS, APPLYCOUNT
+		FROM RECRUITPOSITIONVIEW 
+		WHERE RECRUITNO = #{regionNo }
+		ORDER BY POSNAME
+	</select>
+	
+	<select resultType="com.projectors.mvc.dto.RecruitDTO" id="getAllTools">
+		SELECT TOOL_NO AS TOOLNO, TOOL_NAME AS TOOLNAME
+		FROM TOOL
+	</select>
+	
+	<select resultType="com.projectors.mvc.dto.RecruitDTO" id="getAllPos">
+		SELECT POS_NO AS POSNO, POS_NAME AS POSNAME
+		FROM POSITION
+	</select>
+	
+	<!-- ↓ 모집공고 insert -->
+	<insert id="insertRecruit">
+		INSERT INTO RECRUIT (RECRUIT_NO, PIN_NO, DO_TYPE_NO, TITLE, CONTENT, CREATED_DATE, PRJ_START, PRJ_END)
+		VALUES ('RC'||TO_CHAR(RECRUITNOSEQ.NEXTVAL), #{pinNo }, #{doTypeNo }, #{title }, #{content }, SYSDATE
+		      , TO_DATE(#{prjStart } || ' 00:00:00', 'YYYY-MM-DD HH24:MI:SS')
+		      , TO_DATE(#{prjEnd } || ' 00:00:00', 'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	
+	<select resultType="java.lang.String" id="getRecruitNo">
+		SELECT R.RECRUIT_NO
+		FROM RECRUIT R
+		WHERE R.CREATED_DATE = (SELECT MAX(CREATED_DATE) FROM RECRUIT)
+		  AND R.PIN_NO = #{pinNo }
+	</select>
+	
+	<insert id="insertRecruitTool">
+		INSERT INTO RECRUIT_TOOL (RECRUIT_TOOL_NO, RECRUIT_NO, TOOL_NO)
+		VALUES ('RT'||TO_CHAR(RTOOLNOSEQ.NEXTVAL)
+		     , #{recruitNo }
+		     , #{toolNo })
+	</insert>
+	
+	<insert id="insertRecruitPos">
+		INSERT INTO RECRUIT_POS (RECRUIT_POS_NO, RECRUIT_NO, POS_NO) 
+		VALUES ('RP'||TO_CHAR(RECRUITPOSSEQ.NEXTVAL)
+		     , #{recruitNo }
+		     , #{posNo })
+	</insert>
+	
+	<select resultType="java.lang.String" id="getCapRecruitPosNo">
+		SELECT RECRUIT_POS_NO
+		FROM RECRUIT_POS
+		WHERE POS_NO = #{posCapNo }
+		  AND RECRUIT_NO = #{recruitNo }
+		  AND ROWNUM = 1
+	</select>
+	
+	<insert id="insertApplyPosCap">
+		INSERT INTO APPLY (APPLY_NO, RECRUIT_POS_NO, PIN_NO, CONTENT, APPLY_DATE)
+		VALUES ('AP'||TO_CHAR(APPLYNOSEQ.NEXTVAL)
+		      , #{recruitPosNo }
+		      , #{pinNo }
+		      , '모집공고 작성자 자동 지원'
+		      , SYSDATE)
+	</insert>
+	
+	<select resultType="java.lang.String" id="getCapApplyNo">
+		SELECT APPLY_NO
+		FROM APPLY
+		WHERE RECRUIT_POS_NO = #{recruitPosNo }
+	</select>
+	
+	<insert id="insertFirstCKCap">
+		INSERT INTO FIRST_CK (FIRST_CK_NO, APPLY_NO, PASS_DATE)
+		VALUES ('FS'||TO_CHAR(FIRSTCKSEQ.NEXTVAL), #{applyNo }, SYSDATE)
+	</insert>
+	
+	<select resultType="java.lang.Integer" id="regDateCheck">
+		SELECT COUNT(*) AS COUNTREG FROM REGVIEW WHERE PINNO = #{pinNo} AND REGDATE > 0
+	</select>
+	
+	
+	<!--
+	private int regionNo, subRegionNo, posNo, toolNo;
+	private String regionName, subRegionName, posName, toolName;
+	private int countAll, countPos;
+	private String recruitNo, pinNo, deadlineDate, dDay, prjStart, prjEnd, title, content;
+	
+	private int posCapNo;
+	private String recruitPosNo, applyNo;
+	-->
+	
+</mapper>

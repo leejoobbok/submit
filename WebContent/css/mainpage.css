@@ -1,0 +1,172 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.bannerOuter
+{
+	height: 200px;
+	margin: auto;
+	border: none;
+	border-radius: 10px;
+	
+    font-family: 'SUITE-Regular';
+	background-color: #f29595;
+	color: white;
+	text-align: center;
+	
+	/* 나중에 없앨 예정 */
+	font-size: 30pt;
+	padding-top: 20px;
+}
+
+/* 화면 가로 비율에 따라 바뀌기 */
+@media (min-width: 1350px) {
+    .bannerOuter {
+	width: 1300px;
+    }
+}
+
+@media (max-width: 1350px) {
+    .bannerOuter {
+		width: 1050px;
+    }
+}
+
+.mainContainer {
+	width: 1340px;
+	margin: auto;
+}
+
+.goRecruitListsBtn {
+    font-family: 'SUITE-Regular';
+    font-size: 17pt;
+    font-weight: bold;
+	margin: 50px auto;
+	width: 270px;
+	height: 70px;
+	display: block;
+	border: 5px solid #f29595;
+	border-radius: 7px;
+	background-color: white;
+}
+
+.goRecruitListsBtn:hover {
+	background-color: #f29595;
+	color: white;
+}
+
+.goRecruitListsBtn:active {
+	background-color: #f29595;
+	color: black;
+}
+
+.moreRecruit {
+    font-family: 'SUITE-Regular';
+	text-decoration: none;
+	margin-left: 15px;
+	font-size: 15pt;
+	font-weight: bold;
+}
+
+.moreRecruit:hover {
+    color: orange;
+}
+
+
+.recruitLists {
+    font-family: 'SUITE-Regular';
+	width: 100%;
+	margin: 70px auto;
+	
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+.recruitList {
+}
+
+.recruit {
+	display: inline-block;
+	border: solid 4px orange;
+	border-radius: 10px;
+	width: 290px;
+	height: 380px;
+	margin: 50px 10px 0 20px;
+}
+
+.recruit ul {
+}
+
+.recruit ul li {
+	list-style-type: none;
+    font-family: 'SUITE-Regular';
+    margin-left: -15px;
+    width: 95%
+}
+
+
+.ul1 li:first-child {
+    letter-spacing: 0.05em;
+    font-size: 13pt;
+    color: #686868;
+}
+
+
+.ul1 li:nth-child(2) {
+	margin-top: 15px;
+    font-size: 15pt;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 210px;
+}
+
+.ul1 li:nth-child(3) {
+    letter-spacing: 0.05em;
+    font-size: 13pt;
+    margin-top: 3px;
+}
+
+.ul1 li:nth-child(4) {
+    font-size: 14pt;
+    margin-top: 14px;
+    margin-bottom: 3px;
+}
+
+.pos {
+    font-size: 13pt;
+}
+
+.ul1 {
+	height: 220px;
+}
+
+.ul2 {
+    margin-top: 52px;
+}
+
+.ul2 li:first-child {
+    font-size: 14pt;
+}
+
+.tool {
+    font-size: 13pt;
+    list-style: none;
+    margin-right: 20px;
+    display: inline;
+}
+
+
+
+
+
+
+
+
+
+

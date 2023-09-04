@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.IApplyDAO">
+
+	<select resultType="com.projectors.mvc.dto.ApplyDTO" id="memberInfo">
+		SELECT (SELECT POS_NAME
+		        FROM POSITION
+		        WHERE POS_NO = B.POS_NO) AS POSNAME
+		     , (SELECT SUB_REGION_NAME
+		        FROM SUB_REGION
+		        WHERE SUB_REGION_NO = B.SUB_REGION_NO) AS SUBREGIONNAME
+		     , A.NICKNAME AS NICKNAME
+		     , A.PHOTOURL AS PHOTOURL
+		FROM USERS A LEFT JOIN PROFILE B
+		    ON A.PIN_NO = B.PIN_NO 
+		WHERE B.PIN_NO = #{pinNo}
+	</select>
+	<!-- com.projectors.mvc.RecruitDTO -->
+	
+	<select resultType="com.projectors.mvc.dto.ApplyDTO" id="recruitInfo">
+		SELECT (SELECT TITLE
+		        FROM RECRUIT
+		        WHERE RECRUIT_NO = A.RECRUIT_NO) AS TITLE
+		     , (SELECT POS_NAME
+		        FROM POSITION
+		        WHERE POS_NO = A.POS_NO) AS POSNAME
+		     , RECRUIT_POS_NO AS RECRUITPOSNO
+		FROM RECRUIT_POS A
+		WHERE A.RECRUIT_POS_NO = #{recruitPosNo}
+	</select>
+	
+	<insert id="applyInsert">
+		INSERT INTO APPLY (APPLY_NO, RECRUIT_POS_NO, PIN_NO, CONTENT, APPLY_DATE)
+		VALUES ('AP'||TO_CHAR(APPLYNOSEQ.NEXTVAL)
+		      , #{recruitPosNo}
+		      , #{pinNo}
+		      , #{content}
+		      , SYSDATE)
+	</insert>
+	
+	<select resultType="com.projectors.mvc.dto.ApplyDTO" id="applyArticle">
+		SELECT APPLYNO, RECRUITPOSNO, RECRUITNO, POSNAME, PINNO, CONTENT
+		        , (SELECT TITLE FROM RECRUIT WHERE RECRUIT_NO = A.RECRUITNO) AS TITLE
+		FROM APPLYVIEW A
+		WHERE APPLYNO = #{applyNo}
+	</select>
+
+
+
+
+	<!-- 
+	private String pinNo, profileNo, nickName, applyNo, recruitNo, recruitPosNo, content;
+	
+	private int posNo, toolNo, subRegionNo;
+	private String posName, toolName, subRegionName;
+	private String title, photoUrl;
+	 -->
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.IqnaADAO">
+	
+	
+	<insert id="addAnswer" >							<!-- 답변 등록 쿼리 -->
+		INSERT INTO ANSWER (ANSWER_NO, CONTENT, QUESTION_NO, CREATED_DATE, PIN_NO) 
+		VALUES ('AN'||TO_CHAR(ANSWERNOSEQ.NEXTVAL)
+        , #{answerContent}
+        , #{questionNo}
+        , SYSDATE
+        , 'UP16')  <!-- 관리자 핀 번호만 정적 구성 -->
+	</insert>
+	
+	<select id="answerView" resultType="com.projectors.mvc.dto.QnaADTO"> <!-- 등록한 답변 조회 쿼리  -->
+		SELECT CONTENT AS ANSWERCONTENT,CREATED_DATE AS ANSWERCREATEDDATE
+		FROM ANSWER
+		WHERE QUESTION_NO=#{questionNo}
+	</select>
+	
+	<update id="updateAnswer"> 	<!-- 답변 수정 쿼리  -->
+		UPDATE ANSWER 
+		SET CONTENT = #{answerContent}
+		WHERE QUESTION_NO=#{questionNo}
+	</update>
+	
+	<delete id="deleteAnswer">  <!-- 답변 삭제 쿼리 -->
+		DELETE FROM ANSWER 
+		WHERE QUESTION_NO=#{questionNo}
+	</delete>
+	
+</mapper>
+
+<!--  QnaADTO 의 속성들 
+  questionNo, answerNo, answerPinNo, answerContent, answerCreatedDate;
+// 문의번호, 답변번호, (관리자)식별번호, 답변내용, 답변등록일
+-->

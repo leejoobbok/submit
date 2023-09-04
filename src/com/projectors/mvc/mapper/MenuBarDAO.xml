@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.IMenuBarDAO">
+
+	<!-- 샘플 -->
+	<!-- 
+	<select id="userLogin" resultType="java.lang.Integer">
+		SELECT COUNT(PIN_NO) AS COUNT
+		FROM USERS
+		WHERE ID=#{id} AND PW=#{pw}
+	</select>
+	 -->
+	 
+	 <select id="checkAdmin" resultType="java.lang.String">
+		SELECT COUNT(*) AS COUNT
+		FROM ADMIN
+		WHERE PIN_NO=#{pinNo}	 	
+	 </select>
+</mapper>

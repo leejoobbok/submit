@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.projectors.mvc.dao.IProfileDAO">
+ 
+ 
+ 		<select id="getProfile" resultType="com.projectors.mvc.dto.ProfileDTO">
+			SELECT PROFILENO,NICKNAME,ID,REGIONNO,REGIONNAME,SUBREGIONNO,SUBREGIONNAME,POSNO,POSNAME, PHOTOURL
+			FROM PROFILEVIEW
+			WHERE PINNO=#{pinNo}
+		</select>
+		
+		
+		<select id="getUserTool"  resultType="com.projectors.mvc.dto.ProfileDTO">
+			SELECT TOOLNAME
+			FROM USER_TOOL_VIEW
+			WHERE PINNO=#{pinNo}
+		</select>
+		
+		<select id="getTotalRate" resultType="com.projectors.mvc.dto.ProfileDTO">
+			SELECT RATENAME, TOTAL_COUNT AS COUNT
+			FROM PROFILE_TOTAL_RATE
+			WHERE PINNO=#{pinNo}
+			ORDER BY RATENO ASC
+		
+		</select>
+		
+		<select id="getResult" resultType="java.lang.Integer">
+			SELECT COUNT(*) AS RESULT
+			FROM PROFILE
+			WHERE PIN_NO=#{pinNo}
+		</select>
+		
+		
+		<select id="insertProfile" resultType="com.projectors.mvc.dto.ProfileDTO">
+			INSERT INTO PROFILE
+			( PROFILE_NO
+			, PIN_NO
+			, POS_NO
+			, SUB_REGION_NO
+			, PROFILE_DATE )
+			VALUES
+			( 'PF'||TO_CHAR(PROFILENOSEQ.NEXTVAL)
+			,  #{pinNo}                         
+			,  #{posNo}
+			,  #{subRegionNo}
+			, SYSDATE)
+		</select>
+		
+		<update id="updateProfile">
+			UPDATE PROFILE
+			SET  POS_NO = #{posNo}
+			   , SUB_REGION_NO = #{subRegionNo}
+			   , PROFILE_DATE = SYSDATE
+			WHERE PIN_NO = #{pinNo}
+		</update>
+		
+		
+		
+		
+		<select id="chekUserTool" resultType="java.lang.Integer">
+			SELECT COUNT(UTOOL_NO) AS COUNT
+			FROM USER_TOOL
+			WHERE PROFILE_NO = ( SELECT PROFILE_NO
+                  			     FROM PROFILE
+                     			 WHERE PIN_NO=#{pinNo})
+		</select>
+		
+		<delete id="removeUserTool">
+			DELETE
+			FROM USER_TOOL
+			WHERE PROFILE_NO = ( SELECT PROFILE_NO
+                			     FROM PROFILE
+                  				   WHERE PIN_NO=#{pinNo})
+		</delete>
+		
+		<insert id="userToolInsert">
+			INSERT INTO USER_TOOL
+			( UTOOL_NO
+			, PROFILE_NO
+			, TOOL_NO)
+			VALUES
+			( 'UT'||TO_CHAR(UTOOLNOSEQ.NEXTVAL)
+			, (SELECT PROFILE_NO
+			  FROM PROFILE
+			  WHERE PIN_NO=#{pinNo})
+			, #{toolNo})
+		</insert>
+			
+	
+		<select id="getPosition" resultType="com.projectors.mvc.dto.ProfileDTO">
+			SELECT POS_NO AS POSNO, POS_NAME AS POSNAME
+			FROM POSITION
+		</select>
+		
+		<select id="getUpdatePosition" resultType="com.projectors.mvc.dto.ProfileDTO">
+			SELECT
+   				 P.POS_NO AS POSNO,
+   				 P.POS_NAME AS POSNAME,
+    			MAX(PR.PIN_NO) AS PINNO
+			FROM POSITION P
+			LEFT OUTER JOIN PROFILE PR ON P.POS_NO = PR.POS_NO AND PR.PIN_NO = #{pinNo}
+			GROUP BY P.POS_NO, P.POS_NAME
+			ORDER BY P.POS_NO
+		</select>
+		
+		<select id="getSubRegion" resultType="com.projectors.mvc.dto.ProfileDTO">
+			SELECT SR.SUB_REGION_NO AS SUBREGIONNO, SR.SUB_REGION_NAME AS SUBREGIONNAME 
+			FROM SUB_REGION SR 
+			LEFT JOIN REGION R ON SR.REGION_NO = R.REGION_NO
+			WHERE R.REGION_NO=#{regionNo}
+		</select>
+		
+		<select id="getUpdateSubRegion" resultType="com.projectors.mvc.dto.ProfileDTO">
+			SELECT
+   				 SR.SUB_REGION_NO AS SUBREGIONNO,
+ 				 SR.SUB_REGION_NAME AS SUBREGIONNAME,
+    			 MAX(P.PIN_NO) AS PINNO
+			FROM SUB_REGION SR
+			LEFT OUTER JOIN PROFILE P ON SR.SUB_REGION_NO = P.SUB_REGION_NO AND P.PIN_NO = #{pinNo}
+			GROUP BY SR.SUB_REGION_NO, SR.SUB_REGION_NAME
+			ORDER BY SR.SUB_REGION_NO
+		</select>
+		
+		<select id="getRegion" resultType="com.projectors.mvc.dto.ProfileDTO">
+			SELECT REGION_NO AS REGIONNO, REGION_NAME AS REGIONNAME
+			FROM REGION
+		</select>	
+		
+		
+		<select id="getUpdateRegion" resultType="com.projectors.mvc.dto.ProfileDTO">
+			SELECT
+   				 R.REGION_NO AS REGIONNO,
+   				 R.REGION_NAME AS REGIONNAME,
+   				 MAX(P.PIN_NO) AS PINNO
+			FROM REGION R
+			LEFT OUTER JOIN SUB_REGION SR ON R.REGION_NO = SR.REGION_NO
+			LEFT JOIN PROFILE P ON SR.SUB_REGION_NO = P.SUB_REGION_NO AND P.PIN_NO = #{pinNo}
+			GROUP BY R.REGION_NO, R.REGION_NAME
+			ORDER BY R.REGION_NO
+		</select>
+		
+	
+		
+		<select id="getTool" resultType="com.projectors.mvc.dto.ProfileDTO">
+			SELECT TOOL_NO AS TOOLNO, TOOL_NAME AS TOOLNAME
+			FROM TOOL
+		</select>
+		
+		<select id="getUpdateTool" resultType="com.projectors.mvc.dto.ProfileDTO">
+			SELECT
+					T.TOOL_NO AS TOOLNO,
+    				T.TOOL_NAME AS TOOLNAME,
+    				MAX(P.PIN_NO) AS PINNO
+			FROM TOOL T
+			LEFT OUTER JOIN USER_TOOL UT ON T.TOOL_NO = UT.TOOL_NO
+			LEFT JOIN PROFILE P ON UT.PROFILE_NO = P.PROFILE_NO AND P.PIN_NO = #{pinNo}
+			GROUP BY T.TOOL_NO, T.TOOL_NAME
+			ORDER BY T.TOOL_NO
+		</select>
+		
+ 
+ </mapper>

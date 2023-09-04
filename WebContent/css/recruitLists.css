@@ -1,0 +1,273 @@
+/* @charset "UTF-8"; */
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.alertbox {
+	font-family: 'SUITE-Regular';
+	font-weight: 400;
+	background-color: #efefef;
+	margin: auto;
+	width: 800px;
+	padding: 5px;
+	color: #4a4806;
+	border-radius: 5px;
+	display: none;
+}
+
+.smallTitle {
+	text-align: left;
+	margin-left: 5px;
+    font-family: 'SUITE-Regular';
+    letter-spacing: 0.08em;
+}
+
+.inlineTitle {
+    font-family: 'SUITE-Regular';
+	display: inline;
+}
+
+.inlineTagReg, .inlineTagPos, .inlineTagDo {
+    display: inline;
+}
+
+.outerFilter {
+	width: 840px;
+	margin: auto;
+}
+
+.filter
+{
+	display: inline-block;
+}
+
+.searchTag
+{	
+    font-family: 'SUITE-Regular';
+	border: none;
+	border-radius: 10px;
+	margin-top: 10px;
+	margin-left: 10px;
+	
+	padding: 2px 4px 2px 7px;
+	
+	background-color: orange;
+	color: white;
+	
+	font-size: 12pt;
+}
+
+.SearchDelBtn
+{
+	border: none;
+	border-radius: 8px;
+	
+	padding-bottom: -3px;
+	vertical-align: text-top;
+	
+	background-color: orange;
+	color: white;
+}
+
+.SearchDelBtn:hover
+{
+	color: black;
+	transition: 0.5s;
+}
+
+.search
+{	
+    font-family: 'SUITE-Regular';
+	text-align: center;
+	margin: auto;
+	/* margin-top: 6px; */
+	font-size: 13pt;
+	font-weight: bold;
+	width: 1200px;
+	
+}
+
+.search span {
+	font-family: 'SUITE-Regular';
+	margin-right: 6px;
+}
+
+.search li
+{
+ 	display: inline;
+ 	margin: 0px 10px;
+	padding: 2px;
+	list-style-type: none;
+}
+
+.select {
+	width: 108px;
+	height: 28px;
+	border-radius: 5px;
+	border: 2px solid orange;
+	transition: 0.3s;
+	font-family: 'SUITE-Regular';
+}
+
+.select option {
+	background-color: #ffb324;
+	color: white;
+	font-family: 'SUITE-Regular';
+}
+
+.searchBtn {
+	font-size: 14pt;
+	font-family: 'SUITE-Regular';
+	border-radius: 10px;
+	margin-left: 20px;
+	padding: 5px 15px;
+	color: white;
+	background-color: orange;
+	border: none;
+}
+
+.searchBtn:hover {
+	color: black;
+	transition: 0.5s;
+}
+
+.recruitLists {
+	width: 970px;
+	margin: auto;
+	text-align: center;
+	margin-top: 50px;
+}
+
+.recruitList {
+	margin-top: 30px;
+	border: solid 1px;
+	border-radius: 12px;
+	text-align: center;
+	padding: 5px 5px 5px 5px;
+}
+
+.recruitList ul {
+	text-align: left;
+}
+
+.recruitList li {
+	list-style-type: none;
+}
+
+.recruitList li span {
+	font-family: 'SUITE-Regular';
+}
+
+.recruitList li:first-child {
+    letter-spacing: 0.05em;
+	font-size: 11pt;
+	margin-bottom: 10px;
+}
+
+.recruitList li:nth-child(2) {
+	font-size:14pt;
+}
+
+.recruitList li:nth-child(3) {
+	font-size:12pt;
+}
+
+.dotdot {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width: 870px;
+}
+
+.recruitTitle a {
+	text-decoration: none;
+	color: black;
+	font-family: 'SUITE-Regular';
+	font-size: 18pt;
+}
+
+.recruitStatus {
+	background-color: #f58442;
+	color: white;
+	font-size: 9pt;
+	border-radius: 8px;
+	padding: 2px 6px 2px 6px;
+	
+	vertical-align: baseline;
+}
+
+.endStatus {
+	background-color: gray;
+	color: white;
+	font-size: 9pt;
+	border-radius: 8px;
+	padding: 2px 6px 2px 6px;
+	
+	vertical-align: baseline;
+}
+
+.toolTag {
+	background-color: #ffe8a2;
+	font-size: 11pt;
+	border-radius: 9px;
+	
+	margin: 2px 2px 2px 2px;
+	padding: 3px 8px 3px 8px;
+}
+
+.doTypeTag {
+	background-color: #d8d8d8;
+	font-size: 11pt;
+	border-radius: 9px;
+	
+	margin: 2px 2px 2px 2px;
+	padding: 3px 8px 3px 8px;
+}
+
+.regionTag {
+	background-color: #c7e6fe;
+	font-size: 11pt;
+	border-radius: 9px;
+	
+	margin: 2px 2px 2px 2px;
+	padding: 3px 8px 3px 8px;
+}
+
+.writeBtnArea {
+	text-align: right;
+	margin-bottom: -55px;
+}
+
+.writeBtn {
+	margin-left: 70%;
+	
+	font-family: 'SUITE-Regular';
+	
+	border: none;
+	background-color: orange;
+	color: white;
+	font-size: 16pt;
+	font-weight: 500;
+	border-radius: 9px;
+	
+	padding: 5px 12px 5px 12px;
+}
+
+.guestBtn {
+	margin-left: 70%;
+	
+	font-family: 'SUITE-Regular';
+	
+	border: none;
+	background-color: gray;
+	color: white;
+	font-size: 16pt;
+	font-weight: 500;
+	border-radius: 9px;
+	
+	padding: 5px 12px 5px 12px;
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.ITeamMeetingDAO">
+
+<insert id="add" >
+	INSERT INTO MEETING (MEETING_NO, FINAL_NO, TITLE, CONTENT, FILEURL, CREATED_DATE, MEETING_DATE)
+	VALUES('MT'||TO_CHAR(MEETINGNOSEQ.NEXTVAL)
+	        , 'FN3'			<!-- (임시)작성자의 최종합류 번호 정적 구성 -->
+	        , #{title}
+	        , #{content}
+	       <!-- , #{fileUrl} -->
+	        , null   <!-- (임시) 첨부파일 없음 -->
+	        , SYSDATE
+	        , #{meetingDate})
+</insert>
+
+<update id="modify">
+	UPDATE MEETING 
+	SET TITLE = #{title}
+	,CONTENT = #{content}
+	    <if test="fileUrl != null">
+         ,FILEURL = #{fileUrl, jdbcType=VARCHAR}
+        </if>
+        <if test="fileUrl == null">
+        ,FILEURL = NULL
+        </if> 
+	WHERE MEETING_NO = #{meetingNo}
+</update>
+
+<delete id="delete">
+	DELETE FROM MEETING
+	WHERE MEETING_NO = #{meetingNo}
+</delete>
+
+<select id="getList" resultType="com.projectors.mvc.dto.TeamMeetingDTO">
+	SELECT SUBSTR(M.MEETING_NO,3) meetingNo
+      , U.NICKNAME nickName
+      , M.TITLE title
+      , M.CREATED_DATE createdDate
+      , M.MEETING_DATE meetingDate
+	FROM MEETING M JOIN FINAL F
+	ON M.FINAL_NO = F.FINAL_NO              
+	    JOIN FIRST_CK FC 
+	    ON F.FIRST_CK_NO = FC.FIRST_CK_NO 
+	        JOIN APPLY A 
+	        ON FC.APPLY_NO = A.APPLY_NO 
+	            JOIN USERS U 
+	            ON A.PIN_NO = U.PIN_NO  
+	WHERE M.FINAL_NO IN('FN1','FN2','FN3') <!-- 같은 팀원들(정적구성) -->
+	ORDER BY MEETINGDATE DESC 				<!-- 회의 날짜 최신순으로 정렬  -->
+</select>
+
+<select id="viewArticle" resultType="com.projectors.mvc.dto.TeamMeetingDTO">
+	SELECT SUBSTR(M.MEETING_NO,3) meetingNo
+      , M.TITLE title
+      , M.CONTENT content
+      , NVL(M.FILEURL,'첨부파일없음') fileUrl
+      , U.NICKNAME nickName
+      , M.CREATED_DATE createdDate
+      , M.MEETING_DATE meetingDate
+	FROM MEETING M JOIN FINAL F
+	ON M.FINAL_NO = F.FINAL_NO             
+	    JOIN FIRST_CK FC 
+	    ON F.FIRST_CK_NO = FC.FIRST_CK_NO 
+	        JOIN APPLY A 
+	        ON FC.APPLY_NO = A.APPLY_NO 
+	            JOIN USERS U 
+	            ON A.PIN_NO = U.PIN_NO  
+	WHERE MEETING_NO = #{meetingNo}
+</select>
+
+</mapper>

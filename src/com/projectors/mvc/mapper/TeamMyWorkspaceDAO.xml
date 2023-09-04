@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.ITeamMyWorkspaceDAO">
+
+<select id="getList" resultType="com.projectors.mvc.dto.TeamMyWorkspaceDTO">
+	SELECT SUBSTR(WORKSPACE_NO,3), TITLE, WORK_DATE, CREATED_DATE  
+	FROM WORKSPACE
+	WHERE FINAL_NO = 'FN1'   <!-- 임시 정적 구성 -->
+	ORDER BY WORK_DATE DESC  <!-- 작업일 최신순 정렬 -->
+</select>
+
+<select id="readArticle" resultType="com.projectors.mvc.dto.TeamMyWorkspaceDTO"> 
+	SELECT WORKSPACE_NO, TITLE, WORK_DATE, CREATED_DATE, CONTENT
+	FROM WORKSPACE 
+	WHERE WORKSPACE_NO = #{workspaceNo} 
+</select>
+
+<insert id="add" >
+	INSERT INTO WORKSPACE(WORKSPACE_NO, FINAL_NO, TITLE, CONTENT, WORK_DATE, CREATED_DATE)
+	VALUES('WS'||TO_CHAR(WORKSPACENOSEQ.NEXTVAL) <!-- 작업 글 번호 -->
+	     , 'FN1'  <!-- 작성자의 최종합류번호 (임시 정적구성)  -->
+	     , #{title}
+	     , #{content}
+	     , #{workDate}
+	     , SYSDATE)
+</insert>
+
+<update id="modify">
+	UPDATE WORKSPACE
+	SET TITLE = #{title},
+	    CONTENT =  #{content},
+	    WORK_DATE = #{workDate}
+	WHERE WORKSPACE_NO = #{workspaceNo}
+</update>
+
+<delete id="delete">
+	DELETE FROM WORKSPACE
+	WHERE WORKSPACE_NO = #{workspaceNo}
+</delete>
+
+
+</mapper>

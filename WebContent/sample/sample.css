@@ -1,0 +1,58 @@
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: lightgray;
+
+    position: relative;
+}
+
+.top {
+    width: 100%;
+    height: 80px;
+    background-color: lightcyan;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.main {
+    width: 100%;
+    height: 200%;
+    margin-top: 80px;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    background-color: darkgoldenrod;
+
+    gap: 10px;
+}
+
+.left {
+    height: 100%;
+    width: 20%;
+
+    background-color: blue;
+}
+
+.right {
+    height: 100%;
+    width: 80%;
+
+    background-color: red;
+}
+
+.footer {
+    width: 100%;
+    height: 60px;
+
+    background-color: bisque;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

@@ -1,0 +1,280 @@
+전국
+--
+1서울
+--
+2경기
+	1 , 2, '고양시'
+	2 , 2, '과천시'
+	3 , 2, '광명시'
+	4 , 2, '광주시'
+	5 , 2, '구리시'
+	6 , 2, '군포시'
+	7 , 2, '남양주'
+	8 , 2, '동두천'
+	9 , 2, '부천시'
+	10, 2, '성남시'
+	11, 2, '수원시'
+	12, 2, '시흥시'
+	13, 2, '안산시'
+	14, 2, '안성시'
+	15, 2, '안양시'
+	16, 2, '양주시'
+	17, 2, '여주시'
+	18, 2, '오산시'
+	19, 2, '용인시'
+	20, 2, '의왕시'
+	21, 2, '의정부시
+	22, 2, '이천시'
+	23, 2, '파주시'
+	24, 2, '평택시'
+	25, 2, '포천시'
+	26, 2, '하남시'
+	27, 2, '화성시'
+--	
+3인천
+--
+4부산
+--
+5대구
+--
+6광주
+--
+7대전
+--
+8울산
+--
+9세종
+--
+10강원
+	28,10,'강릉시' 
+	29,10,'동해시' 
+	30,10,'삼척시' 
+	31,10,'속초시' 
+	32,10,'원주시' 
+    33,10,'춘천시'  
+    34,10,'태백시'  
+--
+11경남
+35,11,'거제시' 
+36,11,'김해시' 
+37,11,'밀양시' 
+38,11,'사천시' 
+39,11,'양산시' 
+40,11,'진주시' 
+41,11,'창원시' 
+42,11,'통영시' 
+--
+12경북
+ 43,12,'경산시'
+ 44,12,'경주시'
+ 45,12,'구미시'
+ 46,12,'김천시'
+ 47,12,'문경시'
+ 48,12,'상주시'
+ 49,12,'안동시'
+ 50,12,'영주시'
+ 51,12,'영천시'
+ 52,12,'포항시'
+--
+13전남
+ 53,13,'광양시'
+ 54,13,'나주시'
+ 55,13,'목포시'
+ 56,13,'순천시'
+ 57,13,'여수시'
+--
+14전북
+ 58,14,'군산시'
+ 59,14,'김제시'
+ 60,14,'남원시'
+ 61,14,'익산시'
+ 62,14,'전주시'
+ 63,14,'정읍시'
+--
+15충남
+ 64,15,'개룡시'
+ 65,15,'공주시'
+ 66,15,'논산시'
+ 67,15,'당진시'
+ 68,15,'보령시'
+ 69,15,'서산시'
+ 70,15,'아산시'
+ 71,15,'천안시'
+--
+16충북
+ 72,16,'제천시'
+ 73,16,'청주시'
+ 74,16,'충주시'
+--
+17제주
+	75,17,'제주시'
+	76,17,'서귀포시'
+	
+	
+	
+========================================
+MEM_OUT_REASON (개인이탈사유)
+1. 다른 프로젝트 참여
+2. 취업
+3. 팀내 불화
+4. 역량차이
+5. 개인사정
+
+INTO
+
+INSERT INTO MEM_OUT_REASON VALUES(1,'다른 프로젝트 참여');
+INSERT INTO MEM_OUT_REASON VALUES(2,'취업');
+INSERT INTO MEM_OUT_REASON VALUES(3,'팀내 불화');
+INSERT INTO MEM_OUT_REASON VALUES(4,'역량차이');
+INSERT INTO MEM_OUT_REASON VALUES(5,'개인사정');
+
+
+
+PRJ_STOP_REASON (팀 중단사유)
+1. 목표 불충족
+2. 시장 변화
+3. 조직 전략 변경
+4. 팀 구성원의 이탈
+5. 법적문제
+6. 예산 부족
+7. 팀장 개인사정
+
+INSERT INTO PRJ_STOP_REASON VALUES(1,'목표 불충족');
+INSERT INTO PRJ_STOP_REASON VALUES(2,'시장 변화');
+INSERT INTO PRJ_STOP_REASON VALUES(3,'조직 전략 변경');
+INSERT INTO PRJ_STOP_REASON VALUES(4,'팀 구성원의 이탈');
+INSERT INTO PRJ_STOP_REASON VALUES(5,'법적문제');
+INSERT INTO PRJ_STOP_REASON VALUES(6,'예산 부족');
+INSERT INTO PRJ_STOP_REASON VALUES(7,'팀장 개인사정');
+
+REP_PRJ_REASON (팀스페이스 신고 사유)
+1. 부적절한 콘텐츠 (선정적, 공격적인 내용 등)
+2. 스팸 및 광고
+3. 부당한 운영방식
+4. 법적문제
+5. 비방 및 명예훼손
+
+INSERT INTO REP_PRJ_REASON VALUES(1,'부적절한 콘텐츠 (선정적, 공격적인 내용 등)');
+INSERT INTO REP_PRJ_REASON VALUES(2,'스팸 및 광고');
+INSERT INTO REP_PRJ_REASON VALUES(3,'부당한 운영방식');
+INSERT INTO REP_PRJ_REASON VALUES(4,'법적문제');
+INSERT INTO REP_PRJ_REASON VALUES(5,'비방 및 명예훼손');
+
+
+WITHDRAW_TYPE (회원탈퇴)
+1. 사용 빈도 감소
+2. 서비스 이용 불편
+3. 목적달성
+4. 다른 서비스 이용
+5. 개인적 이유
+
+INSERT INTO WITHDRAW_TYPE VALUES(1,'사용 빈도 감소');
+INSERT INTO WITHDRAW_TYPE VALUES(2,'서비스 이용 불편');
+INSERT INTO WITHDRAW_TYPE VALUES(3,'목적달성');
+INSERT INTO WITHDRAW_TYPE VALUES(4,'다른 서비스 이용');
+INSERT INTO WITHDRAW_TYPE VALUES(5,'개인적 이유');
+
+
+
+REPORT_REASON (신고사유)
+1. 부적절한 언어 사용
+2. 저작권 침해
+3. 도배 및 광고
+4. 개인정보 침해
+5. 허위사실유포
+
+INSERT INTO REPORT_REASON VALUES(1,'부적절한 언어 사용');
+INSERT INTO REPORT_REASON VALUES(2,'저작권 침해');
+INSERT INTO REPORT_REASON VALUES(3,'도배 및 광고');
+INSERT INTO REPORT_REASON VALUES(4,'개인정보 침해');
+INSERT INTO REPORT_REASON VALUES(5,'허위사실유포');
+
+
+REPORT_RESULT (신고 처리 결과)
+1. 처리
+2. 반려
+3. 대기
+
+INSERT INTO REPORT_RESULT VALUES(1,'처리');
+INSERT INTO REPORT_RESULT VALUES(2,'반려');
+INSERT INTO REPORT_RESULT VALUES(3,'대기');
+
+
+REGULATION (위반 항목)
+1. 성희롱
+2. 음란물
+3. 욕설
+4. 광고
+5. 도배
+6. 유해한 행위(자해 및 자살 등)
+7. 사기성 행위
+8. 부적절한 콘텐츠
+9. 기타
+
+INSERT INTO REGULATION VALUES(1,'성희롱');
+INSERT INTO REGULATION VALUES(2,'음란물');
+INSERT INTO REGULATION VALUES(3,'욕설');
+INSERT INTO REGULATION VALUES(4,'광고');
+INSERT INTO REGULATION VALUES(5,'도배');
+INSERT INTO REGULATION VALUES(6,'유해한 행위(자해 및 자살 등)');
+INSERT INTO REGULATION VALUES(7,'사기성 행위');
+INSERT INTO REGULATION VALUES(8,'부적절한 콘텐츠');
+INSERT INTO REGULATION VALUES(9,'기타');
+
+REGULATION_PERIOD (제재 기간)
+1. 7일			7
+2. 14일			14
+3. 400년		73000
+
+INSERT INTO REGULATION_PERION VALUES(1,7);
+INSERT INTO REGULATION_PERION VALUES(2,14);
+INSERT INTO REGULATION_PERION VALUES(3,73000);
+
+
+
+
+DO_TYPE
+1. 대면
+2. 비대면
+
+
+TOOL
+1.JavaScript (프론트엔드/백엔드)
+2.Python (일반 목적)
+3.Java (일반 목적)
+4.C# (일반 목적)
+5.PHP (서버 사이드)
+6.C++ (일반 목적)
+7.Ruby (일반 목적)
+8.Swift (iOS 앱 개발)
+9.Kotlin (안드로이드 앱 개발)
+10.TypeScript (자바스크립트 슈퍼셋)
+11.React (프론트엔드 라이브러리)
+12.Angular (프론트엔드 프레임워크)
+13.Vue.js (프론트엔드 프레임워크)
+14.Django (파이썬 웹 프레임워크)
+15.Ruby on Rails (루비 웹 프레임워크)
+16.Spring Boot (자바 백엔드 프레임워크)
+17.Express.js (노드.js 웹 프레임워크)
+18.Flask (파이썬 웹 프레임워크)
+19.jQuery (자바스크립트 라이브러리)
+20.TensorFlow (머신러닝 프레임워크)
+21. Visual Studio Code (통합 개발 환경)
+22.Git (버전 관리 시스템)
+23.Docker (컨테이너화 플랫폼)
+24.Node.js (런타임 환경)
+25.Jupyter Notebook (데이터 분석 및 시각화)
+26.Android Studio (안드로이드 앱 개발 환경)
+27.Xcode (iOS 앱 개발 환경)
+28.Eclipse (통합 개발 환경)
+29.PostgreSQL (관계형 데이터베이스)
+30.MySQL (관계형 데이터베이스)
+
+
+RATE_SELECT
+1. 열심히 참여함
+2. 협업능력이 뛰어남
+3. 업무 수행 능력이 뛰어남
+4. 참여율이 저조함
+5. 협업능력이 부족함
+6. 업무 수행 능력이 낮음

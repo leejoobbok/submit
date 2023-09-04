@@ -1,0 +1,519 @@
+SELECT USER
+FROM DUAL;
+--==>> PROJECTORS
+
+-- ○ 지역 REGION 테이블 범례 INSERT
+INSERT INTO REGION VALUES (1,'서울특별시');
+INSERT INTO REGION VALUES (2,'경기도');
+INSERT INTO REGION VALUES (3,'인천광역시');
+INSERT INTO REGION VALUES (4,'부산광역시');
+INSERT INTO REGION VALUES (5,'대구광역시');
+INSERT INTO REGION VALUES (6,'광주광역시');
+INSERT INTO REGION VALUES (7,'대전광역시');
+INSERT INTO REGION VALUES (8,'울산광역시');
+INSERT INTO REGION VALUES (9,'세종특별시');
+INSERT INTO REGION VALUES (10,'강원도');
+INSERT INTO REGION VALUES (11,'경상남도');
+INSERT INTO REGION VALUES (12,'경상북도');
+INSERT INTO REGION VALUES (13,'전라남도');
+INSERT INTO REGION VALUES (14,'전라북도');
+INSERT INTO REGION VALUES (15,'충청남도');
+INSERT INTO REGION VALUES (16,'충청북도');
+INSERT INTO REGION VALUES (17,'제주특별자치도');
+--==>> 1 행 이(가) 삽입되었습니다. * 17 
+
+
+SELECT *
+FROM REGION;
+--==>> 
+/*
+1	서울특별시
+2	경기도
+3	인천광역시
+4	부산광역시
+5	대구광역시
+6	광주광역시
+7	대전광역시
+8	울산광역시
+9	세종특별시
+10	강원도
+11	경상남도
+12	경상북도
+13	전라남도
+14	전라북도
+15	충청남도
+16	충청북도
+17	제주특별자치도
+*/
+
+--○ 세부지역 SUB_REGION 테이블 범례 INSERT
+-- 경기도 2번
+  INSERT INTO SUB_REGION VALUES( 1 , 2,'고양시'  );
+  INSERT INTO SUB_REGION VALUES( 2 , 2,'과천시'  );
+  INSERT INTO SUB_REGION VALUES( 3 , 2,'광명시'  );
+  INSERT INTO SUB_REGION VALUES( 4 , 2,'광주시'  );
+  INSERT INTO SUB_REGION VALUES( 5 , 2,'구리시'  );
+  INSERT INTO SUB_REGION VALUES( 6 , 2,'군포시'  );
+  INSERT INTO SUB_REGION VALUES( 7 , 2,'남양주'  );
+  INSERT INTO SUB_REGION VALUES( 8 , 2,'동두천'  );
+  INSERT INTO SUB_REGION VALUES( 9 , 2,'부천시'  );
+  INSERT INTO SUB_REGION VALUES( 10, 2,'성남시'  );
+  INSERT INTO SUB_REGION VALUES( 11, 2,'수원시'  );
+  INSERT INTO SUB_REGION VALUES( 12, 2,'시흥시'  );
+  INSERT INTO SUB_REGION VALUES( 13, 2,'안산시'  );
+  INSERT INTO SUB_REGION VALUES( 14, 2,'안성시'  );
+  INSERT INTO SUB_REGION VALUES( 15, 2,'안양시'  );
+  INSERT INTO SUB_REGION VALUES( 16, 2,'양주시'  );
+  INSERT INTO SUB_REGION VALUES( 17, 2,'여주시'  );
+  INSERT INTO SUB_REGION VALUES( 18, 2,'오산시'  );
+  INSERT INTO SUB_REGION VALUES( 19, 2,'용인시'  );
+  INSERT INTO SUB_REGION VALUES( 20, 2,'의왕시'  );
+  INSERT INTO SUB_REGION VALUES( 21, 2,'의정부시');
+  INSERT INTO SUB_REGION VALUES( 22, 2,'이천시'  );
+  INSERT INTO SUB_REGION VALUES( 23, 2,'파주시'  );
+  INSERT INTO SUB_REGION VALUES( 24, 2,'평택시'  );
+  INSERT INTO SUB_REGION VALUES( 25, 2,'포천시'  );
+  INSERT INTO SUB_REGION VALUES( 26, 2,'하남시'  );
+  INSERT INTO SUB_REGION VALUES( 27, 2,'화성시'  );
+
+-- 강원 10번
+  INSERT INTO SUB_REGION VALUES (28,10,'강릉시');
+  INSERT INTO SUB_REGION VALUES (29,10,'동해시');
+  INSERT INTO SUB_REGION VALUES (30,10,'삼척시');
+  INSERT INTO SUB_REGION VALUES (31,10,'속초시');
+  INSERT INTO SUB_REGION VALUES (32,10,'원주시');
+  INSERT INTO SUB_REGION VALUES (33,10,'춘천시');
+  INSERT INTO SUB_REGION VALUES (34,10,'태백시');
+
+-- 경남 11번
+ INSERT INTO SUB_REGION VALUES(35,11,'거제시');
+ INSERT INTO SUB_REGION VALUES(36,11,'김해시');
+ INSERT INTO SUB_REGION VALUES(37,11,'밀양시');
+ INSERT INTO SUB_REGION VALUES(38,11,'사천시');
+ INSERT INTO SUB_REGION VALUES(39,11,'양산시');
+ INSERT INTO SUB_REGION VALUES(40,11,'진주시');
+ INSERT INTO SUB_REGION VALUES(41,11,'창원시');
+ INSERT INTO SUB_REGION VALUES(42,11,'통영시');
+
+-- 12경북
+ INSERT INTO SUB_REGION VALUES(43,12,'경산시');
+ INSERT INTO SUB_REGION VALUES(44,12,'경주시');
+ INSERT INTO SUB_REGION VALUES(45,12,'구미시');
+ INSERT INTO SUB_REGION VALUES(46,12,'김천시');
+ INSERT INTO SUB_REGION VALUES(47,12,'문경시');
+ INSERT INTO SUB_REGION VALUES(48,12,'상주시');
+ INSERT INTO SUB_REGION VALUES(49,12,'안동시');
+ INSERT INTO SUB_REGION VALUES(50,12,'영주시');
+ INSERT INTO SUB_REGION VALUES(51,12,'영천시');
+ INSERT INTO SUB_REGION VALUES(52,12,'포항시');
+-- 13전남
+ INSERT INTO SUB_REGION VALUES(53,13,'광양시');
+ INSERT INTO SUB_REGION VALUES(54,13,'나주시');
+ INSERT INTO SUB_REGION VALUES(55,13,'목포시');
+ INSERT INTO SUB_REGION VALUES(56,13,'순천시');
+ INSERT INTO SUB_REGION VALUES(57,13,'여수시');
+-- 14전북
+ INSERT INTO SUB_REGION VALUES(58,14,'군산시');
+ INSERT INTO SUB_REGION VALUES(59,14,'김제시');
+ INSERT INTO SUB_REGION VALUES(60,14,'남원시');
+ INSERT INTO SUB_REGION VALUES(61,14,'익산시');
+ INSERT INTO SUB_REGION VALUES(62,14,'전주시');
+ INSERT INTO SUB_REGION VALUES(63,14,'정읍시');
+-- 15충남
+ INSERT INTO SUB_REGION VALUES(64,15,'개룡시');
+ INSERT INTO SUB_REGION VALUES(65,15,'공주시');
+ INSERT INTO SUB_REGION VALUES(66,15,'논산시');
+ INSERT INTO SUB_REGION VALUES(67,15,'당진시');
+ INSERT INTO SUB_REGION VALUES(68,15,'보령시');
+ INSERT INTO SUB_REGION VALUES(69,15,'서산시');
+ INSERT INTO SUB_REGION VALUES(70,15,'아산시');
+ INSERT INTO SUB_REGION VALUES(71,15,'천안시');
+-- 16충북
+ INSERT INTO SUB_REGION VALUES(72,16,'제천시');
+ INSERT INTO SUB_REGION VALUES(73,16,'청주시');
+ INSERT INTO SUB_REGION VALUES(74,16,'충주시');
+-- 17제주
+ INSERT INTO SUB_REGION VALUES(75,17,'제주시');
+ INSERT INTO SUB_REGION VALUES(76,17,'서귀포시');
+ 
+--==>> 1 행 이(가) 삽입되었습니다. * 76
+
+
+--◆ 세부 지역이 없는 지역들에 대한 전체라는 세부지역 생성 SUB_REGION
+INSERT INTO SUB_REGION VALUES( 991 , 1,'전체');
+INSERT INTO SUB_REGION VALUES( 993 , 3,'전체');
+INSERT INTO SUB_REGION VALUES( 994 , 4,'전체');
+INSERT INTO SUB_REGION VALUES( 995 , 5,'전체');
+INSERT INTO SUB_REGION VALUES( 996 , 6,'전체');
+INSERT INTO SUB_REGION VALUES( 997 , 7,'전체');
+INSERT INTO SUB_REGION VALUES( 998 , 8,'전체');
+INSERT INTO SUB_REGION VALUES( 999 , 9,'전체');
+-- 1 행 이(가) 삽입되었습니다. * 8
+
+SELECT *
+FROM SUB_REGION;
+/*
+991	1	전체
+993	3	전체
+994	4	전체
+995	5	전체
+996	6	전체
+997	7	전체
+998	8	전체
+999	9	전체
+1	2	고양시
+2	2	과천시
+3	2	광명시
+4	2	광주시
+5	2	구리시
+6	2	군포시
+7	2	남양주
+8	2	동두천
+9	2	부천시
+10	2	성남시
+11	2	수원시
+12	2	시흥시
+13	2	안산시
+14	2	안성시
+15	2	안양시
+16	2	양주시
+17	2	여주시
+18	2	오산시
+19	2	용인시
+20	2	의왕시
+21	2	의정부시
+22	2	이천시
+23	2	파주시
+24	2	평택시
+25	2	포천시
+26	2	하남시
+27	2	화성시
+28	10	강릉시
+29	10	동해시
+30	10	삼척시
+31	10	속초시
+32	10	원주시
+33	10	춘천시
+34	10	태백시
+35	11	거제시
+36	11	김해시
+37	11	밀양시
+38	11	사천시
+39	11	양산시
+40	11	진주시
+41	11	창원시
+42	11	통영시
+43	12	경산시
+44	12	경주시
+45	12	구미시
+46	12	김천시
+47	12	문경시
+48	12	상주시
+49	12	안동시
+50	12	영주시
+51	12	영천시
+52	12	포항시
+53	13	광양시
+54	13	나주시
+55	13	목포시
+56	13	순천시
+57	13	여수시
+58	14	군산시
+59	14	김제시
+60	14	남원시
+61	14	익산시
+62	14	전주시
+63	14	정읍시
+64	15	개룡시
+65	15	공주시
+66	15	논산시
+67	15	당진시
+68	15	보령시
+69	15	서산시
+70	15	아산시
+71	15	천안시
+72	16	제천시
+73	16	청주시
+74	16	충주시
+75	17	제주시
+76	17	서귀포시
+*/
+
+
+-- ○ 개인이탈사유 범례
+INSERT INTO MEM_OUT_REASON VALUES(1, '다른 프로젝트 참여');
+INSERT INTO MEM_OUT_REASON VALUES(2, '취업');
+INSERT INTO MEM_OUT_REASON VALUES(3, '팀내 불화');      
+INSERT INTO MEM_OUT_REASON VALUES(4, '역량차이' );     
+INSERT INTO MEM_OUT_REASON VALUES(5, '개인사정' );    
+--==>> 1 행 이(가) 삽입되었습니다. * 5
+
+SELECT *
+FROM MEM_OUT_REASON;
+--==>>
+/*
+1	다른 프로젝트 참여
+2	취업
+3	팀내 불화
+4	역량차이
+5	개인사정
+*/
+
+-- ○ 팀 중단사유 범례
+INSERT INTO PRJ_STOP_REASON VALUES(1,'목표 불충족');
+INSERT INTO PRJ_STOP_REASON VALUES(2,'시장 변화');
+INSERT INTO PRJ_STOP_REASON VALUES(3,'조직 전략 변경');
+INSERT INTO PRJ_STOP_REASON VALUES(4,'팀 구성원의 이탈');
+INSERT INTO PRJ_STOP_REASON VALUES(5,'법적문제');
+INSERT INTO PRJ_STOP_REASON VALUES(6,'예산 부족');
+INSERT INTO PRJ_STOP_REASON VALUES(7,'팀장 개인사정');
+--==>> 
+
+SELECT *
+FROM PRJ_STOP_REASON;
+--==>>
+/*
+1	목표 불충족
+2	시장 변화
+3	조직 전략 변경
+4	팀 구성원의 이탈
+5	법적문제
+6	예산 부족
+7	팀장 개인사정
+*/
+
+
+-- ○ 팀 스페이스 신고 사유 범례
+INSERT INTO REP_PRJ_REASON VALUES(1,'부적절한 콘텐츠');
+INSERT INTO REP_PRJ_REASON VALUES(2,'스팸 및 광고');
+INSERT INTO REP_PRJ_REASON VALUES(3,'부당한 운영방식');
+INSERT INTO REP_PRJ_REASON VALUES(4,'법적문제');
+INSERT INTO REP_PRJ_REASON VALUES(5,'비방 및 명예훼손');
+--==>> 1 행 이(가) 삽입되었습니다. * 5
+
+SELECT *
+FROM REP_PRJ_REASON;
+--==>>
+/*
+2	스팸 및 광고
+3	부당한 운영방식
+4	법적문제
+5	비방 및 명예훼손
+1	부적절한 콘텐츠
+*/
+
+
+-- ○ 회원탈퇴 사유 범례
+INSERT INTO WITHDRAW_TYPE VALUES(1,'사용 빈도 감소');
+INSERT INTO WITHDRAW_TYPE VALUES(2,'서비스 이용 불편');
+INSERT INTO WITHDRAW_TYPE VALUES(3,'목적달성');
+INSERT INTO WITHDRAW_TYPE VALUES(4,'다른 서비스 이용');
+INSERT INTO WITHDRAW_TYPE VALUES(5,'개인적 이유');
+--==>> 1 행 이(가) 삽입되었습니다. * 5
+
+SELECT *
+FROM WITHDRAW_TYPE;
+--==>>
+/*
+1	사용 빈도 감소
+2	서비스 이용 불편
+3	목적달성
+4	다른 서비스 이용
+5	개인적 이유
+*/
+
+-- ○ 신고사유 범례
+INSERT INTO REPORT_REASON VALUES(1,'부적절한 언어 사용');
+INSERT INTO REPORT_REASON VALUES(2,'저작권 침해');
+INSERT INTO REPORT_REASON VALUES(3,'도배 및 광고');
+INSERT INTO REPORT_REASON VALUES(4,'개인정보 침해');
+INSERT INTO REPORT_REASON VALUES(5,'허위사실유포');
+--==>> 1 행 이(가) 삽입되었습니다. * 5
+
+SELECT *
+FROM REPORT_REASON;
+--==>>
+/*
+1	부적절한 언어 사용
+2	저작권 침해
+3	도배 및 광고
+4	개인정보 침해
+5	허위사실유포
+*/
+
+
+
+-- ○ 신고처리결과 범례
+INSERT INTO REPORT_RESULT VALUES(0,'반려');
+INSERT INTO REPORT_RESULT VALUES(1,'처리');
+--==>> 1 행 이(가) 삽입되었습니다.
+
+SELECT *
+FROM REPORT_RESULT;
+--==>>
+/*
+1	처리
+0	반려
+*/
+
+-- ○ 제재 항목 범례
+INSERT INTO REGULATION VALUES(1,'성희롱');
+INSERT INTO REGULATION VALUES(2,'음란물');
+INSERT INTO REGULATION VALUES(3,'욕설');
+INSERT INTO REGULATION VALUES(4,'광고');
+INSERT INTO REGULATION VALUES(5,'도배');
+INSERT INTO REGULATION VALUES(6,'유해한 행위(자해 및 자살 등)');
+INSERT INTO REGULATION VALUES(7,'사기성 행위');
+INSERT INTO REGULATION VALUES(8,'부적절한 콘텐츠');
+INSERT INTO REGULATION VALUES(9,'기타');
+--==>> 1 행 이(가) 삽입되었습니다. * 9
+
+SELECT *
+FROM REGULATION;
+--==>>
+/*
+1	성희롱
+2	음란물
+3	욕설
+4	광고
+5	도배
+6	유해한 행위(자해 및 자살 등)
+7	사기성 행위
+8	부적절한 콘텐츠
+9	기타
+*/
+
+
+-- ○ 재재 기간 범례
+INSERT INTO REGULATION_PERIOD VALUES(1,7);
+INSERT INTO REGULATION_PERIOD VALUES(2,14);
+INSERT INTO REGULATION_PERIOD VALUES(3,73000);  -- 200 년
+--==>> 1 행 이(가) 삽입되었습니다.
+
+SELECT *
+FROM REGULATION_PERIOD;
+--==>>
+/*
+1	7
+2	14
+3	73000
+*/
+
+-- ○ 대면 여부 범례
+INSERT INTO DO_TYPE VALUES(0,'비대면');
+INSERT INTO DO_TYPE VALUES(1,'대면');
+--==>> 1 행 이(가) 삽입되었습니다. * 2
+
+SELECT *
+FROM DO_TYPE;
+--==>>
+/*
+1	대면
+0	비대면
+*/
+
+
+-- ○ 사용기술(도구) 범례
+INSERT INTO TOOL VALUES (1, 'JavaScript');
+INSERT INTO TOOL VALUES (2, 'Python');
+INSERT INTO TOOL VALUES (3, 'Java');
+INSERT INTO TOOL VALUES (4, 'C#');
+INSERT INTO TOOL VALUES (5, 'PHP');
+INSERT INTO TOOL VALUES (6, 'C++');
+INSERT INTO TOOL VALUES (7, 'Ruby');
+INSERT INTO TOOL VALUES (8, 'Swift');
+INSERT INTO TOOL VALUES (9, 'Kotlin');
+INSERT INTO TOOL VALUES (10, 'TypeScript');
+INSERT INTO TOOL VALUES (11, 'React');
+INSERT INTO TOOL VALUES (12, 'Angular');
+INSERT INTO TOOL VALUES (13, 'Vue.js');
+INSERT INTO TOOL VALUES (14, 'Django');
+INSERT INTO TOOL VALUES (15, 'Ruby on Rails');
+INSERT INTO TOOL VALUES (16, 'Spring Boot');
+INSERT INTO TOOL VALUES (17, 'Express.js');
+INSERT INTO TOOL VALUES (18, 'Flask');
+INSERT INTO TOOL VALUES (19, 'jQuery');
+INSERT INTO TOOL VALUES (20, 'TensorFlow');
+INSERT INTO TOOL VALUES (21, 'Visual Studio Code');
+INSERT INTO TOOL VALUES (22, 'Git');
+INSERT INTO TOOL VALUES (23, 'Docker');
+INSERT INTO TOOL VALUES (24, 'Node.js');
+INSERT INTO TOOL VALUES (25, 'Jupyter Notebook');
+INSERT INTO TOOL VALUES (26, 'Android Studio');
+INSERT INTO TOOL VALUES (27, 'Xcode');
+INSERT INTO TOOL VALUES (28, 'Eclipse');
+INSERT INTO TOOL VALUES (29, 'PostgreSQL');
+INSERT INTO TOOL VALUES (30, 'MySQL');
+--==>> 1 행 이(가) 삽입되었습니다. * 30
+
+SELECT *
+FROM TOOL;
+--==>> 
+/*
+1	JavaScript
+2	Python
+3	Java
+4	C#
+5	PHP
+6	C++
+7	Ruby
+8	Swift
+9	Kotlin
+10	TypeScript
+11	React
+12	Angular
+13	Vue.js
+14	Django
+15	Ruby on Rails
+16	Spring Boot
+17	Express.js
+18	Flask
+19	jQuery
+20	TensorFlow
+21	Visual Studio Code
+22	Git
+23	Docker
+24	Node.js
+25	Jupyter Notebook
+26	Android Studio
+27	Xcode
+28	Eclipse
+29	PostgreSQL
+30	MySQL
+*/
+
+-- ○ 평가사유 범례
+INSERT INTO RATE_SELECT VALUES(1,'열심히 참여함');
+INSERT INTO RATE_SELECT VALUES(2,'협업능력이 뛰어남');
+INSERT INTO RATE_SELECT VALUES(3,'업무 능력이 뛰어남');
+INSERT INTO RATE_SELECT VALUES(4,'참여율이 저조함');
+INSERT INTO RATE_SELECT VALUES(5,'협업능력이 부족함');
+INSERT INTO RATE_SELECT VALUES(6,'업무 수행 능력이 낮음');
+--==>> 1 행 이(가) 삽입되었습니다. * 6
+
+SELECT *
+FROM RATE_SELECT;
+--==>>
+/*
+1	열심히 참여함
+2	협업능력이 뛰어남
+3	업무 능력이 뛰어남
+4	참여율이 저조함
+5	협업능력이 부족함
+6	업무 수행 능력이 낮음
+*/
+
+COMMIT;
+
+
+
+INSERT INTO POSITION VALUES (1, 'FRONTEND');
+INSERT INTO POSITION VALUES (2, 'BACKEND');
+INSERT INTO POSITION VALUES (3, 'FULLSTACK');
+INSERT INTO POSITION VALUES (4, 'PUBLISHING');
+INSERT INTO POSITION VALUES (5, 'DESIGN');
+INSERT INTO POSITION VALUES (6, 'PLANNING');
+
+COMMIT;
+--==>> 커밋 완료
+

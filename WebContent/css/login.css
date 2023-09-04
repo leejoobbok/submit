@@ -1,0 +1,200 @@
+/* @charset "UTF-8"; */
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.header-logo {
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+	
+.loginBox
+{	
+    font-family: 'SUITE-Regular';
+	font-weight: bold;
+    font-size: 16pt;
+	width: 360px;
+	
+	height:160px;
+	margin: 0px auto 4px;
+	padding: 40px 30px 20px 50px;
+		
+	border: 1px solid;
+	border-radius: 20px;
+}
+	
+.loginBox span
+{	
+	display: inline-block;
+	width: 100px;
+	margin: 5px;
+}
+	
+.loginBox input {
+	width: 200px;
+	height: 23px;
+	padding-left: 7px;
+}
+
+#loginBtn
+{	
+    font-family: 'SUITE-Regular';
+	background-color: orange;
+	color: white;
+	font-weight: bold;
+	font-size: 14pt;
+		
+	width: 330px;
+	height: 36px;
+	padding: 2px;
+	margin-top: 20px;
+	border-radius: 5px;
+	border: none;
+	letter-spacing: 0.4em;
+}
+#etcLogin
+{
+	text-align: center;
+	width: 400px;
+	margin: auto;
+	margin-top: 10px;
+}
+
+#etcLogin a
+{
+    font-family: 'SUITE-Regular';
+	text-decoration: none;
+	color: black;
+	font-size: 11pt;
+	font-weight: bold;
+	margin-left: 18px;
+}
+
+#etcLogin a:hover
+{
+	color: orange;
+}
+
+input::placeholder
+{
+  color: gray;
+  font-size: 10pt;
+  padding-left: 7px;
+}
+#adminCheck
+{
+	float: right;
+	color: gray;
+	font-size: 11pt;
+	font-weight: bold;
+}
+#managerCheck {
+	width: 14px;
+	vertical-align: middle;
+	margin-bottom: 6px;
+}
+.tempNotAccept {
+	font-size: 7pt;
+	color: red;
+}
+
+
+.titleBox {
+	width: 500px;
+	margin: auto;
+}
+
+.joinTitle {
+	font-size: 18pt;
+	font-weight: bold;
+    font-family: 'SUITE-Regular';
+    margin-bottom: 14px;
+    margin-left: 16px;
+}
+
+.joinOuterBox
+{	
+	width: 500px;
+	margin: 10px auto;
+	border: 1px solid;
+	border-radius: 20px;
+	padding: 30px 30px 30px 50px;
+}
+
+#joinBox span {	
+    font-family: 'SUITE-Regular';
+	display: inline-block;
+	margin: 2px;
+}
+
+.smallCheckListTitle {
+	width: 140px;
+}
+
+#joinBox input {
+	width: 300px;
+	height: 22px;
+	padding-left: 7px;
+	margin-bottom: 5px;
+}
+
+input::placeholder {
+	font-family: 'SUITE-Regular';
+	color: gray;
+	font-size: 10pt;
+}
+	
+#sendJoinBtn {
+    font-family: 'SUITE-Regular';
+	background-color: orange;
+	color: white;
+	font-weight: bold;
+	font-size: 14pt;
+		
+	width: 330px;
+	height: 36px;
+	padding: 2px;
+	margin-top: 20px;
+	border-radius: 5px;
+	border: none;
+	letter-spacing: 0.2em;
+	font-size: 10pt;
+}
+	
+#sendJoinBtn:hover {
+	color: black;
+}
+
+.Checkalert {
+	margin-left: 150px;
+	margin-top: -5px;
+	margin-bottom: -10px;
+	width: 300px;
+}
+
+.alertCheck {
+    display: none;
+	color:red;
+	font-size: 9pt;
+}
+
+/* 
+#sendPinBtn					인증번호 발송 버튼
+{
+	margin-left: 150px;
+	display: none;
+}	
+\*/
+
+#sendJoinBtn
+{	
+	display: block;
+	width: 180px;
+	font-size: 16pt;
+	margin: 40px 200px 0px 180px;
+}
+	

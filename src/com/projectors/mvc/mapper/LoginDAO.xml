@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.ILoginDAO">
+
+	<!-- 사용자 로그인
+	결과값이 0보다 크면 아이디 비밀번호 일치   -->
+	<select id="userLogin" resultType="java.lang.Integer">
+		SELECT COUNT(PIN_NO) AS COUNT
+		FROM USERS
+		WHERE ID=#{id} AND PW=#{pw}
+	</select>
+	
+	<!-- 아이디와 비밀번호로 사용자 핀을 추출
+	로그인 성공시 세션에 등록 위함-->
+	<select id="getUserPin" resultType="java.lang.String">
+		SELECT PIN_NO AS PINNO
+		FROM USERS
+		WHERE ID=#{id} AND PW=#{pw}
+	</select>
+		
+	<!-- 관리자 로그인
+	결과값이 0보다 크면 아이디 비밀번호 일치 -->
+	<select id="adminLogin" resultType="java.lang.Integer">
+		SELECT COUNT(PIN_NO) AS COUNT
+		FROM ADMIN
+		WHERE ADMIN_ID=#{id} AND ADMIN_PW=#{pw}
+	</select>
+	
+	<!-- 아이디와 비밀번호로 관리자 핀을 추출 
+	로그인 성공시 세션에 등록 위함-->
+	<select id="getAdminPin" resultType="java.lang.String">
+		SELECT PIN_NO AS PINNO
+		FROM ADMIN
+		WHERE ADMIN_ID=#{id} AND ADMIN_PW=#{pw}
+	</select>
+	
+	<select id="getAdminNo" resultType="java.lang.String">
+		SELECT ADMIN_NO AS ADMINNO
+		FROM ADMIN
+		WHERE ADMIN_ID=#{id} AND ADMIN_PW=#{pw}
+	</select>
+	
+	<!-- 로그인 로그 기록 -->
+	<insert id="loginRec">
+		INSERT INTO LOGIN_REC
+		VALUES
+		( LOGINRECSEQ.NEXTVAL
+		, #{pinNo}
+		, SYSDATE)
+	</insert>
+	
+	<select id="findLoginRec" resultType="com.projectors.mvc.dto.LoginDTO">
+		SELECT LOGIN_REC as logInRecNo
+		     , PIN_NO as pinNo
+		     , TO_CHAR(LOGIN_DATE, 'YYYY-MM-DD HH24:MI:SS') as logInDate
+		FROM LOGIN_REC
+		ORDER BY logInRecNo DESC
+	</select>
+	
+	<!-- 로그아웃 로그 기록 -->
+	<insert id="logoutRec">
+		INSERT INTO LOGOUT_REC
+		VALUES
+		( LOGOUTRECSEQ.NEXTVAL
+		, #{pinNo}
+		, SYSDATE)
+	</insert>
+	
+	<select id="findLogoutRec" resultType="com.projectors.mvc.dto.LoginDTO">
+		SELECT LOGOUT_REC as logOutRecNo
+		     , PIN_NO as pinNo
+		     , TO_CHAR(LOGOUT_DATE, 'YYYY-MM-DD HH24:MI:SS') as logOutDate
+		FROM LOGOUT_REC
+		ORDER BY logOutRecNo DESC
+	</select>
+	
+</mapper>

@@ -1,0 +1,54 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+a {text-decoration: none;}
+
+.btnHeight {
+	border-right: 3px solid black;
+}
+
+#nowButton, #pastButton {
+	text-align: left;
+	width: 100px;
+}
+
+.listsDiv {
+	width: 800px;
+	margin-left: 50px;
+}
+
+.titleText1 {
+    font-family: 'SUITE-Regular';
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+.applyNow {
+	
+}
+
+.applyComplete {
+	
+}
+
+.applyPast {
+	
+}
+
+.paging {
+	text-align: center;
+	margin-left: -300px;
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+.paging span {
+	font-size: 14pt;
+    font-family: 'SUITE-Regular';
+}

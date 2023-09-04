@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.ISendReportDAO">
+
+<insert id="reportRecruit"> <!-- 모집공고 신고접수 -->
+	INSERT INTO REP_RECRUIT(REP_RECRUIT_NO, RECRUIT_NO, PIN_NO, CREATED_DATE, REP_REASON_NO)
+	VALUES('REPR'|| TO_CHAR(REPRECNOSEQ.NEXTVAL)
+	       ,#{recruitNo},#{pinNo},SYSDATE, #{repReason})
+</insert>
+
+<insert id="reportApply"><!-- 지원서 신고접수 -->
+	INSERT INTO REPORT_APPLY(REP_APPLY_NO, APPLY_NO, PIN_NO, CREATED_DATE, REP_REASON_NO)
+	VALUES('REPA'|| TO_CHAR(REPAPPLYNOSEQ.NEXTVAL)
+       ,#{applyNo},#{pinNo},SYSDATE,#{repReason})
+
+</insert>
+
+<insert id="reportComment"><!-- 댓글 신고 접수 -->
+	INSERT INTO REPORT_COMM(REP_COMM_NO, COMM_NO, PIN_NO, REP_DATE, REP_REASON_NO)
+	VALUES(REPCOMMNOSEQ.NEXTVAL
+		   ,#{commNo}
+		   ,#{pinNo},SYSDATE, #{repReason})
+</insert>
+
+
+<insert id="reportNote"><!-- 쪽지 신고 접수 -->
+	INSERT INTO REPORT_NOTE(REP_NOTE_NO, NOTE_NO, PIN_NO, REP_REASON_NO, CREATED_DATE)
+	VALUES('REPN'|| TO_CHAR(REPNOTENOSEQ.NEXTVAL)
+	    ,#{noteNo}
+	    ,#{pinNo}
+	    ,#{repReason}, SYSDATE )
+</insert>
+
+</mapper>

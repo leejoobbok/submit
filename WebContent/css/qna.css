@@ -1,0 +1,296 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'SUITE-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+a {text-decoration: none;}
+
+.btnHeight {
+	border-right: 3px solid black;
+}
+
+#faqButton, #qnaButton {
+	text-align: left;
+	width: 100px;
+}
+
+.listsDiv {
+	width: 700px;
+	margin-left: 50px;
+}
+
+.faqListTitle {
+    font-family: 'SUITE-Regular';
+	font-size: 15pt;
+}
+
+.titleText1 {
+    font-family: 'SUITE-Regular';
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+.listsDiv {
+	display: inline-block;
+	width: 800px;
+	margin-top: 30px;
+	margin-left: 30px;
+    font-family: 'SUITE-Regular';
+}
+
+.qnaListNum, .qnaListTitle, .qnaListDate, .qnaListAns {
+	display: inline-block;
+	font-size: 13pt;
+	font-weight: bold;
+    font-family: 'SUITE-Regular';
+    text-align: center;
+    height: 25px;
+}
+
+.qnaListNum {
+	width: 9%;
+}
+
+.qnaListTitle {
+	width: 50%;
+}
+
+.qnaListDate {
+	width: 23%;
+}
+
+.qnaListAns {
+	width: 14%;
+}
+
+.qnaListNum2, .qnaListTitle2, .qnaListDate2, .qnaListAns2 {
+	display: inline-block;
+    font-family: 'SUITE-Regular';
+    height: 21px;
+}
+
+.qnaListNum2, .qnaListAns2 {
+	font-size: 11pt;
+    text-align: center;
+	width: 10%;
+}
+
+.qnaListAns2 {
+	font-size: 11pt;
+    text-align: center;
+	width: 13%;
+}
+
+.qnaListDate2 {
+	font-size: 11pt;
+    text-align: center;
+	width: 23%;
+}
+
+.qnaListTitle2 {
+	font-size: 11pt;
+	width: 50%;
+}
+
+.qnaListTitle2 a:hover {
+	font-weight: bold;
+}
+
+.tableLine1 {
+	border: 2px solid black;
+}
+
+.tableLine2 {
+	border: 0.5px solid lightgray;
+	width: 98%
+}
+
+.paging {
+	text-align: center;
+	margin-left: -300px;
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+.paging span {
+	font-size: 14pt;
+    font-family: 'SUITE-Regular';
+}
+
+.articleDiv {
+	width: 800px;
+	margin-top: 30px;
+	margin-left: 30px;
+}
+
+.qnaArticleTitle, .qnaArticleDate, .qnaArticleTitle2, .qnaArticleDate2, .ansArticleDate, .ansArticleDate2, .ansArticleDate, .ansArticleDate2  {
+    font-family: 'SUITE-Regular';
+    font-size: 14pt; 
+	display: inline-block;
+	height: 30px;
+	padding-top: 5px;
+}
+
+.qnaArticleTitle, .qnaArticleDate {
+	width: 9%;
+	text-align: center;
+	font-weight: bold;
+}
+
+.qnaArticleTitle2 {
+	width: 53%;
+}
+
+.qnaArticleDate2 {
+	padding-left: 7px;
+	width: 26%;
+}
+
+.qnaArticleContent, .qnaArticleContent2 {
+	display: inline-block;
+    font-family: 'SUITE-Regular';
+    font-size: 14pt; 
+	height: 200px;
+	padding-top: 10px;
+}
+
+.qnaArticleContent, .qnaArticleContent2 {
+	display: inline-block;
+    font-family: 'SUITE-Regular';
+    font-size: 14pt; 
+	height: 200px;
+	padding-top: 10px;
+}
+
+.qnaArticleContent {
+	width: 9%;
+	text-align: center;
+	font-weight: bold;
+}
+
+.qnaArticleContent2 {
+	width: 89%;
+}
+
+.article4 {
+	margin-top: 40px;
+	text-align: center;
+	height: 40px;
+}
+
+.anstitle2 {
+    font-family: 'SUITE-Regular';
+    font-size: 15pt; 
+	font-weight: bold;
+}
+
+.ansArticleContent, .ansArticleContent2 {
+	display: inline-block;
+    font-family: 'SUITE-Regular';
+    font-size: 14pt; 
+	height: 100px;
+	padding-top: 10px;
+}
+
+.ansArticleContent {
+	width: 9%;
+	text-align: center;
+	font-weight: bold;
+}
+
+.ansArticleContent2 {
+	width: 89%;
+}
+
+.ansArticleDate {
+	text-align: center;
+	font-weight: bold;
+	width: 10%;
+}
+
+.alertEmptyAnswer {
+	text-align: center;
+    font-family: 'SUITE-Regular';
+    font-size: 14pt; 
+}
+
+#returnList {
+    font-family: 'SUITE-Regular';
+    font-size: 14pt; 
+	width: 110px;
+	height: 32px;
+	border: none;
+	border-radius: 5px;
+	background-color: #ffdd9d;
+	margin-left: 80px;
+}
+
+#returnList:hover {
+	background-color: orange;
+	color: white;
+}
+
+.btnRight {
+	text-align: right;
+	margin-bottom: 20px;
+}
+
+#WriteQnA {
+    font-family: 'SUITE-Regular';
+    font-size: 13pt; 
+	width: 110px;
+	height: 32px;
+	border: none;
+	border-radius: 5px;
+	background-color: #ffdd9d;
+	margin-left: 80px;
+}
+
+#WriteQnA:hover {
+	background-color: orange;
+	color: white;
+}
+
+.Insert2 {
+	margin-top: 20px;
+}
+
+.qnaInsertTitle, .questionTitle, .qnaInsertContent, .questionContent {
+	font-family: 'SUITE-Regular';
+    font-size: 14pt; 
+	display: inline-block;
+	padding-top: 5px;
+}
+
+.qnaInsertContent {
+	vertical-align: top;
+}
+
+.questionTitle, .questionContent {
+	width: 80%;
+	margin-left: 13px;
+	padding-left: 15px;
+}
+
+.questionContent {
+	resize: none;
+}
+
+#submitQnA, #cancelQnA {
+    font-family: 'SUITE-Regular';
+    font-size: 13pt; 
+	width: 110px;
+	height: 32px;
+	border: none;
+	border-radius: 5px;
+	background-color: #ffdd9d;
+}
+
+#submitQnA:hover, #cancelQnA:hover {
+	background-color: orange;
+	color: white;
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.IFeedDAO">
+
+	<select id="loadFeed" resultType="com.projectors.mvc.dto.FeedDTO">
+		SELECT U.NICKNAME nickName, F.CONTENT content, F.CREATED_DATE createdDate 
+		FROM FEED F JOIN FINAL FN 
+		ON F.FINAL_NO = FN.FINAL_NO 	        <!-- 최종 합류번호로 조인 -->
+		    JOIN FIRST_CK FC 
+		    ON FN.FIRST_CK_NO = FC.FIRST_CK_NO  <!-- 1차 합격 번호로 조인 -->
+		        JOIN APPLY A 
+		        ON FC.APPLY_NO = A.APPLY_NO     <!-- 포지션 지원번호로 조인 -->
+		            JOIN USERS U 
+		            ON A.PIN_NO = U.PIN_NO       <!-- PIN 번호로 조인  -->
+		WHERE F.FINAL_NO IN ('FN1', 'FN2', 'FN3') <!-- (임시) 정적 구성  -->
+		ORDER BY F.CREATED_DATE DESC       
+	</select>
+
+	<insert id="addFeed">
+		INSERT INTO FEED(FEED_NO, FINAL_NO, CONTENT, CREATED_DATE) 
+		VALUES(FEEDNOSEQ.NEXTVAL
+	        , 'FN1'               <!-- (임시) 정적 구성  -->
+	        , #{content}
+	        , SYSDATE)
+	</insert>
+	
+</mapper>

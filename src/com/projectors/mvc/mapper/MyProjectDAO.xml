@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.projectors.mvc.dao.IMyProjectDAO">
+ 
+ 	<!-- 현재 프로젝트 정보 얻어내는 메소드 -->
+ 	<select id="presentProject" resultType="com.projectors.mvc.dto.MyProjectDTO">
+ 			SELECT PRJ.PRJ_NO AS PRJNO, REC.RECRUIT_NO AS RECRUITNO, REC.TITLE AS RECRUITNAME, TO_CHAR(REC.PRJ_START) AS PRJSTART, TO_CHAR(REC.PRJ_END) AS PRJEND, POS.POS_NAME AS POSNAME
+				  , TO_CHAR(TRUNC(REC.PRJ_END - SYSDATE)) AS DDAY
+			FROM PROJECT PRJ
+			LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+			LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+			LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+			LEFT JOIN POSITION POS ON POS.POS_NO = RP.POS_NO
+			WHERE AP.PIN_NO = #{pinNo} AND PRJ.PRJ_NO NOT IN 
+			                                         ( SELECT DISTINCT PRJ_NO
+			                                            FROM (
+			                                                SELECT PRJ.PRJ_NO
+			                                                FROM MEMBER_OUT MO
+			                                                LEFT JOIN FINAL FN ON MO.FINAL_NO = FN.FINAL_NO
+			                                                LEFT JOIN FIRST_CK FS ON FN.FIRST_CK_NO = FS.FIRST_CK_NO
+			                                                LEFT JOIN APPLY AP ON FS.APPLY_NO = AP.APPLY_NO
+			                                                LEFT JOIN RECRUIT_POS RP ON AP.RECRUIT_POS_NO = RP.RECRUIT_POS_NO
+			                                                LEFT JOIN RECRUIT REC ON RP.RECRUIT_NO = REC.RECRUIT_NO
+			                                                LEFT JOIN PROJECT PRJ ON REC.RECRUIT_NO = PRJ.RECRUIT_NO
+			                                                WHERE AP.PIN_NO = #{pinNo}
+			                                                
+			                                                UNION
+			                                                
+			                                                SELECT PS.PRJ_NO
+			                                                FROM PROJECT_STOP PS
+			                                                LEFT JOIN PROJECT PRJ ON PS.PRJ_NO = PRJ.PRJ_NO
+			                                                LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+			                                                LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+			                                                LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+			                                                WHERE AP.PIN_NO = #{pinNo}
+			                                                
+			                                                UNION
+			                                                
+			                                                SELECT PRJ.PRJ_NO
+			                                                FROM PROJECT PRJ
+			                                                LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+			                                                LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+			                                                LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+			                                                WHERE SYSDATE > REC.PRJ_END AND AP.PIN_NO = #{pinNo}
+			                                                                                                         )
+			                                        )
+ 	</select>
+ 	
+ 	<select id="getMember" resultType="com.projectors.mvc.dto.MyProjectDTO">
+			SELECT FN.FINAL_NO AS FINALNO, US.NICKNAME AS NICKNAME, POS.POS_NAME AS POSNAME
+			FROM RECRUIT_POS RP
+			LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+			LEFT JOIN USERS US ON AP.PIN_NO = US.PIN_NO
+			LEFT JOIN POSITION POS ON RP.POS_NO = POS.POS_NO
+			LEFT JOIN FIRST_CK FS ON AP.APPLY_NO = FS.APPLY_NO
+			LEFT JOIN FINAL FN ON FS.FIRST_CK_NO = FN.FIRST_CK_NO
+			WHERE RP.RECRUIT_NO=#{recruitNo}
+ 	</select>
+ 	
+ 	
+ 	<select id="getMemberCount" resultType="java.lang.Integer">
+	 		SELECT COUNT(FN.FINAL_NO) AS COUNT
+			FROM RECRUIT_POS RP
+			LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+			LEFT JOIN USERS US ON AP.PIN_NO = US.PIN_NO
+			LEFT JOIN POSITION POS ON RP.POS_NO = POS.POS_NO
+			LEFT JOIN FIRST_CK FS ON AP.APPLY_NO = FS.APPLY_NO
+			LEFT JOIN FINAL FN ON FS.FIRST_CK_NO = FN.FIRST_CK_NO
+			WHERE RP.RECRUIT_NO=#{recruitNo}
+ 	</select>
+ 	
+ 	<select id="positionCount" resultType="com.projectors.mvc.dto.MyProjectDTO">
+ 			SELECT POS.POS_NAME AS POSNAME, COUNT(POS.POS_NAME) AS COUNT
+			FROM RECRUIT_POS RP
+			LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+			LEFT JOIN USERS US ON AP.PIN_NO = US.PIN_NO
+			LEFT JOIN POSITION POS ON RP.POS_NO = POS.POS_NO
+			LEFT JOIN FIRST_CK FS ON AP.APPLY_NO = FS.APPLY_NO
+			LEFT JOIN FINAL FN ON FS.FIRST_CK_NO = FN.FIRST_CK_NO
+			WHERE RP.RECRUIT_NO=#{recruitNo}
+			GROUP BY POS.POS_NAME
+ 	</select>
+ 	
+ 	
+ 	<select id="pastProject" resultType="com.projectors.mvc.dto.MyProjectDTO">
+ 		SELECT DISTINCT PRJ_NO AS PRJNO, RECRUIT_NO AS RECRUITNO, TITLE AS RECRUITNAME, PRJ_START AS PRJSTART, PRJ_END AS PRJEND, POS_NAME AS POSNAME
+		FROM (
+			    SELECT PRJ.PRJ_NO, REC.RECRUIT_NO, REC.TITLE, REC.PRJ_START, REC.PRJ_END, POS.POS_NAME
+			    FROM MEMBER_OUT MO
+			    LEFT JOIN FINAL FN ON MO.FINAL_NO = FN.FINAL_NO
+			    LEFT JOIN FIRST_CK FS ON FN.FIRST_CK_NO = FS.FIRST_CK_NO
+			    LEFT JOIN APPLY AP ON FS.APPLY_NO = AP.APPLY_NO
+			    LEFT JOIN RECRUIT_POS RP ON AP.RECRUIT_POS_NO = RP.RECRUIT_POS_NO
+			    LEFT JOIN RECRUIT REC ON RP.RECRUIT_NO = REC.RECRUIT_NO
+			    LEFT JOIN PROJECT PRJ ON REC.RECRUIT_NO = PRJ.RECRUIT_NO
+			    LEFT JOIN POSITION POS ON POS.POS_NO = RP.POS_NO
+			    WHERE AP.PIN_NO = #{pinNo}
+			    
+			    UNION
+			    
+			  
+			    SELECT PS.PRJ_NO, REC.RECRUIT_NO, REC.TITLE, REC.PRJ_START, REC.PRJ_END, POS.POS_NAME
+			    FROM PROJECT_STOP PS
+			    LEFT JOIN PROJECT PRJ ON PS.PRJ_NO = PRJ.PRJ_NO
+			    LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+			    LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+			    LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+			    LEFT JOIN POSITION POS ON POS.POS_NO = RP.POS_NO
+			    WHERE AP.PIN_NO = #{pinNo}
+			    
+			    UNION
+			    
+			
+			    SELECT PRJ.PRJ_NO, REC.RECRUIT_NO, REC.TITLE, REC.PRJ_START, REC.PRJ_END, POS.POS_NAME
+			    FROM PROJECT PRJ
+			    LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+			    LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+			    LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+			    LEFT JOIN POSITION POS ON POS.POS_NO = RP.POS_NO
+			    WHERE SYSDATE > REC.PRJ_END AND AP.PIN_NO = #{pinNo}
+				) COMBINED_RESULTS
+				ORDER BY PRJ_END DESC
+ 	</select>
+ 	
+ 	
+ 	<select id="checkPresentProject" resultType="java.lang.Integer">
+ 		SELECT COUNT(*) AS COUNT
+		FROM PROJECT PRJ
+		LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+		LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+		LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+		LEFT JOIN POSITION POS ON POS.POS_NO = RP.POS_NO
+		WHERE AP.PIN_NO = #{pinNo} AND PRJ.PRJ_NO NOT IN 
+		                                         ( SELECT DISTINCT PRJ_NO
+		                                            FROM (
+		                                                SELECT PRJ.PRJ_NO
+		                                                FROM MEMBER_OUT MO
+		                                                LEFT JOIN FINAL FN ON MO.FINAL_NO = FN.FINAL_NO
+		                                                LEFT JOIN FIRST_CK FS ON FN.FIRST_CK_NO = FS.FIRST_CK_NO
+		                                                LEFT JOIN APPLY AP ON FS.APPLY_NO = AP.APPLY_NO
+		                                                LEFT JOIN RECRUIT_POS RP ON AP.RECRUIT_POS_NO = RP.RECRUIT_POS_NO
+		                                                LEFT JOIN RECRUIT REC ON RP.RECRUIT_NO = REC.RECRUIT_NO
+		                                                LEFT JOIN PROJECT PRJ ON REC.RECRUIT_NO = PRJ.RECRUIT_NO
+		                                                WHERE AP.PIN_NO = #{pinNo}
+		                                                
+		                                                UNION
+		                                                
+		                                                SELECT PS.PRJ_NO
+		                                                FROM PROJECT_STOP PS
+		                                                LEFT JOIN PROJECT PRJ ON PS.PRJ_NO = PRJ.PRJ_NO
+		                                                LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+		                                                LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+		                                                LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+		                                                WHERE AP.PIN_NO = #{pinNo}
+		                                                
+		                                                UNION
+		                                                
+		                                                SELECT PRJ.PRJ_NO
+		                                                FROM PROJECT PRJ
+		                                                LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+		                                                LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+		                                                LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+		                                                WHERE SYSDATE > REC.PRJ_END AND AP.PIN_NO = #{pinNo}
+		                                                                                                         )
+		                                        )
+ 	
+ 	</select>
+ 	
+ 	<select  id="checkPastProject"  resultType="java.lang.Integer">
+ 		SELECT DISTINCT COUNT(*) AS COUNT
+		FROM (
+		    SELECT PRJ.PRJ_NO, REC.RECRUIT_NO, REC.TITLE, REC.PRJ_START, REC.PRJ_END, POS.POS_NAME
+		    FROM MEMBER_OUT MO
+		    LEFT JOIN FINAL FN ON MO.FINAL_NO = FN.FINAL_NO
+		    LEFT JOIN FIRST_CK FS ON FN.FIRST_CK_NO = FS.FIRST_CK_NO
+		    LEFT JOIN APPLY AP ON FS.APPLY_NO = AP.APPLY_NO
+		    LEFT JOIN RECRUIT_POS RP ON AP.RECRUIT_POS_NO = RP.RECRUIT_POS_NO
+		    LEFT JOIN RECRUIT REC ON RP.RECRUIT_NO = REC.RECRUIT_NO
+		    LEFT JOIN PROJECT PRJ ON REC.RECRUIT_NO = PRJ.RECRUIT_NO
+		    LEFT JOIN POSITION POS ON POS.POS_NO = RP.POS_NO
+		    WHERE AP.PIN_NO = #{pinNo}
+		    
+		    UNION
+		    
+		    SELECT PS.PRJ_NO, REC.RECRUIT_NO, REC.TITLE, REC.PRJ_START, REC.PRJ_END, POS.POS_NAME
+		    FROM PROJECT_STOP PS
+		    LEFT JOIN PROJECT PRJ ON PS.PRJ_NO = PRJ.PRJ_NO
+		    LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+		    LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+		    LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+		    LEFT JOIN POSITION POS ON POS.POS_NO = RP.POS_NO
+		    WHERE AP.PIN_NO = #{pinNo}
+		    
+		    UNION
+		    
+		    SELECT PRJ.PRJ_NO, REC.RECRUIT_NO, REC.TITLE, REC.PRJ_START, REC.PRJ_END, POS.POS_NAME
+		    FROM PROJECT PRJ
+		    LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+		    LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+		    LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+		    LEFT JOIN POSITION POS ON POS.POS_NO = RP.POS_NO
+		    WHERE SYSDATE > REC.PRJ_END AND AP.PIN_NO = #{pinNo}
+		) COMBINED_RESULTS
+		ORDER BY PRJ_END DESC
+ 	
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 
+ </mapper>

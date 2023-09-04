@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.IAdminNoticeDAO">
+
+<select id="lists" resultType="com.projectors.mvc.dto.AdminNoticeDTO">
+	SELECT ADMIN_NOTICE_NO AS adminNoticeNo
+	   ,(SELECT ADMIN_NO
+	   	 FROM ADMIN
+	   	 WHERE PIN_NO = AN.PIN_NO
+	   	 ) as pinNo
+       , TITLE
+       , CONTENT
+	FROM ADMIN_NOTICE AN
+	ORDER BY adminNoticeNo DESC
+</select>
+
+<insert id="add">
+	INSERT INTO ADMIN_NOTICE(ADMIN_NOTICE_NO, PIN_NO, TITLE, CONTENT)
+	VALUES('AN'||TO_CHAR(ADMINNOSEQ.NEXTVAL), #{pinNo}, #{title} , #{content} )
+</insert>
+
+<delete id="remove">
+	DELETE
+	FROM ADMIN_NOTICE
+	WHERE ADMIN_NOTICE_NO = #{adminNoticeNo} 
+</delete>
+
+<select id="article" resultType="com.projectors.mvc.dto.AdminNoticeDTO">
+	SELECT ADMIN_NOTICE_NO AS adminNoticeNo
+			, TITLE
+	        , CONTENT
+	FROM ADMIN_NOTICE
+	WHERE ADMIN_NOTICE_NO = #{adminNoticeNo}
+</select>
+
+</mapper>

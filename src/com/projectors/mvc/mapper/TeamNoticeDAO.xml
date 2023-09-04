@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.ITeamNoticeDAO">
+ 
+<insert id="add" >
+	INSERT INTO SPACE_NOTICE VALUES('SN'||TO_CHAR(SPACENOTICENOSEQ.NEXTVAL)
+	,'PJ1'					<!-- (임시)프로젝트 번호 정적 구성 -->
+	,#{title}
+	,#{content}
+	,SYSDATE)
+</insert>
+
+<update id="modify">
+	UPDATE SPACE_NOTICE
+	SET CONTENT= #{content}
+	WHERE SPACE_NOTICE_NO = #{spaceNoticeNo}
+</update>
+
+<delete id="delete">
+	DELETE FROM SPACE_NOTICE
+	WHERE SPACE_NOTICE_NO = #{spaceNoticeNo}
+</delete>
+
+<select id="getList" resultType="com.projectors.mvc.dto.TeamNoticeDTO">
+	SELECT SUBSTR(SPACE_NOTICE_NO,3) AS spaceNoticeNo
+	, TITLE AS title
+	, CREATED_DATE AS createdDate
+	FROM  SPACE_NOTICE
+	WHERE PRJ_NO ='PJ1'
+	ORDER BY spaceNoticeNo DESC  <!-- 최신 순 정렬 -->
+</select>
+
+<select id="viewArticle" resultType="com.projectors.mvc.dto.TeamNoticeDTO"> 
+	SELECT SUBSTR(SPACE_NOTICE_NO,3) AS spaceNoticeNo
+	, TITLE AS title
+	, CONTENT AS content
+	, CREATED_DATE AS createdDate
+	FROM  SPACE_NOTICE
+	WHERE SPACE_NOTICE_NO = #{spaceNoticeNo}
+</select>
+
+<select id="findTeamNoticeNo" resultType="java.lang.String">
+	SELECT TO_CHAR(MAX(SPACE_NOTICE_NO)) AS spaceNoticeNo
+	FROM SPACE_NOTICE
+</select>
+
+</mapper>
+
+
+
+
+
+
