@@ -1,6 +1,9 @@
 # submit
 submit_final
 
+# [도메인]
+http://localhost:8090/projectors/projectorsmain.action
+
 # [프로젝트 요약]
 -설명
 ● 웹 개발자들이 모여 장, 단기 프로젝트에서 팀 모집 및 참여가 서비스 제공
