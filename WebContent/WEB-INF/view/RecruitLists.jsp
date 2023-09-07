@@ -221,7 +221,6 @@
 				{
 					if (result == 0)
 					{
-						
 						writeRecruit();	
 					}
 					else
@@ -269,17 +268,76 @@
 	// 프로필 미작성자 / 이미 지원 / 모집 / 팀프로젝트가 있는 사람 예외처리
 	function writeRecruit() {
 		var member = '${pinNo}';
+		
+		var limitByProfile = document.getElementById("limitByProfile").value;
+		var limitByProject = document.getElementById("limitByProject").value;
+		var limitByRecruit = document.getElementById("limitByRecruit").value;
+		var limitByApply = document.getElementById("limitByApply").value;
+		var reguMemOut = document.getElementById("reguMemOut").value;
+		var reguTeamOut =document.getElementById("reguTeamOut").value;
+		var twiceReguException = document.getElementById("twiceReguException").value;
+
 		if (!(member == null && member == "")) {
 			if ($("#regCheck").val() > 0)
 			{
 				alert("제재중인 회원은 게시글 작성이 불가합니다.");
 				// alert($("#regCheck").val());
+				return;
 			}
-			else
+			if (limitByProfile == 0)
+			{
+			   alert("프로필 미등록 회원은 모집 및 지원 기능을 이용할 수 없습니다.")	
+			   return;
+			}
+			if (limitByProject > 0)
+			{
+				alert("이미 진행 중인 프로젝트가 존재합니다.");
+				return;
+			}
+			if (limitByRecruit > 0)
+			{
+				alert("이미 모집 중인 공고가 존재합니다.");
+				return;
+			}
+			if (limitByApply > 0)
+			{
+				alert("이미 제출한 지원서가 존재합니다.");
+				return;
+			}
+			if( (reguMemOut > 0) && (reguTeamOut == 0) )
+			{
+			   alert("프로젝트 개인 이탈 제재 기간입니다.");
+			   return;
+			}
+			if( (reguMemOut > 0) && (reguTeamOut > 0))
+			{
+			   alert("프로젝트 개인 이탈 기간입니다.");
+			   return;
+			}
+			if( (reguMemOut == 0) && (reguTeamOut > 0) )
+			{
+			   if( twiceReguException > 0)
+			   {
+					window.location.href = 'writerecruit.action';
+					return;
+			   }
+			   else
+			   {
+			      alert("프로젝트 폐지에 제재 기간입니다.")
+			      return;
+			   }
+			}
+			
+			alert(limitByProfile);
+			/* alert("공고 지원 가능"); */
 			window.location.href = 'writerecruit.action';
+			return;
 		}
 		else
+		{
 			alert("회원만 모집공고 작성이 가능합니다.");
+			return;
+		}
 	}
 
 	function cannotWriteRecruit() {
@@ -444,6 +502,13 @@
 					</div> <!-- end.recruitList -->
 				</c:forEach>
 				
+				<input type="hidden" id="limitByProfile" name="limitByProfile" value="${limitByProfile }" />
+				<input type="hidden" id="limitByRecruit" name="limitByRecruit" value="${limitByRecruit }" />
+				<input type="hidden" id="limitByApply" name="limitByApply" value="${limitByApply }" />
+				<input type="hidden" id="limitByProject" name="limitByProject" value="${limitByProject }"/>
+				<input type="hidden" id="reguMemOut" name="reguMemOut" value="${reguMemOut }"/>
+				<input type="hidden" id="reguTeamOut" name="reguTeamOut" value="${reguTeamOut }"/>
+				<input type="hidden" id="twiceReguException" name="twiceReguException" value="${twiceReguException }"/>
 				<input type="hidden" id="pinNo" name="pinNo" value="${pinNo }"/>
 				
 			</div> <!-- end.recruitLists -->

@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+/*==========  상단 공통 요소 (메뉴바까지) ==================*/
+#logoBox 					   /*로고 이미지*/
+{
+	text-align: center;
+	height: 100px;
+	padding-top: 20px;
+	/* border: 1px solid; */
+}
+#upperBarBox 				 /*최상단 바(로그인..쪽지)*/
+{
+	text-align: right;
+}
+#menuBar					/*메뉴바(메인|공지..)*/
+{
+	text-align: center;
+	position :sticky;  
+	padding-top: 32px;
+    top: -32px;
+}
+/*==========================================================*/
+/*=========================서브메뉴바=========================*/
+a 
+{
+	text-decoration: none;
+	padding: 4px 14px 4px 14px;
+}
+
+#subMenuBar
+{
+	text-align: left;
+	font-size: 12pt;
+	font-weight: bold;
+	background-color: white;
+}
+/*==========================================================*/
+
+/* ====================== 좌측바 ========================= */
+#leftBar
+{
+	float: left;
+	width: 20%;
+	height : 300px;
+	text-align: center;
+}
+
+.btnHeight
+{
+	padding: 10px;
+	border-right: 3px solid black;
+}
+
+/* ======================================================= */
+
+
+/* ====================== 우측바 ========================= */
+#rightBar
+{
+	float: right;
+	width: 70%;
+	padding : 0% 5% 0% 5%;
+}
+
+.blackBtn
+{
+	font-size: x-small;
+	color: white;
+	background-color: black;
+	border: none;
+}
+
+.table
+{
+	text-align: auto;
+	width: 100%;
+}
+
+th
+{
+	border-bottom: 1px solid gray;
+}
+
+td
+{
+	text-align: center;
+}
+
+.right-left { width: 80%;}
+.right-right { width: 10%;}
+/* ======================================================= */
+
+#paging
+{
+	margin: auto;
+	text-align: center;
+}

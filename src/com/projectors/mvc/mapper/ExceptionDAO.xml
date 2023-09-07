@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.projectors.mvc.dao.IExceptionDAO">
+
+	<select id="limitByProfile" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM PROFILE
+		WHERE PIN_NO=#{pinNo}
+	</select>
+
+	<select id="limitByRecruit" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM RECRUIT REC
+		WHERE REC.PIN_NO= #{pinNo}
+		AND REC.CREATED_DATE > SYSDATE-14
+	</select>
+	
+	<select id="limitByApply" resultType="java.lang.Integer">
+		SELECT  COUNT(*) AS COUNT
+		FROM APPLY AP
+		LEFT JOIN RECRUIT_POS REP ON AP.RECRUIT_POS_NO = REP.RECRUIT_POS_NO
+		LEFT JOIN RECRUIT REC ON REP.RECRUIT_NO = REC.RECRUIT_NO
+		WHERE AP.PIN_NO=#{pinNo} AND REC.CREATED_DATE > SYSDATE-14
+	</select>
+	
+	<select id="limitByProject" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM PROJECT PRJ
+		LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+		LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+		LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+		LEFT JOIN POSITION POS ON POS.POS_NO = RP.POS_NO
+		WHERE AP.PIN_NO = #{pinNo} AND PRJ.PRJ_NO NOT IN 
+		                                         ( SELECT DISTINCT PRJ_NO
+		                                            FROM (
+		                                                SELECT PRJ.PRJ_NO
+		                                                FROM MEMBER_OUT MO
+		                                                LEFT JOIN FINAL FN ON MO.FINAL_NO = FN.FINAL_NO
+		                                                LEFT JOIN FIRST_CK FS ON FN.FIRST_CK_NO = FS.FIRST_CK_NO
+		                                                LEFT JOIN APPLY AP ON FS.APPLY_NO = AP.APPLY_NO
+		                                                LEFT JOIN RECRUIT_POS RP ON AP.RECRUIT_POS_NO = RP.RECRUIT_POS_NO
+		                                                LEFT JOIN RECRUIT REC ON RP.RECRUIT_NO = REC.RECRUIT_NO
+		                                                LEFT JOIN PROJECT PRJ ON REC.RECRUIT_NO = PRJ.RECRUIT_NO
+		                                                WHERE AP.PIN_NO = #{pinNo}
+		                                                
+		                                                UNION
+		                                                
+		                                                SELECT PS.PRJ_NO
+		                                                FROM PROJECT_STOP PS
+		                                                LEFT JOIN PROJECT PRJ ON PS.PRJ_NO = PRJ.PRJ_NO
+		                                                LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+		                                                LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+		                                                LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+		                                                WHERE AP.PIN_NO = #{pinNo}
+		                                                
+		                                                UNION
+		                                                
+		                                                SELECT PRJ.PRJ_NO
+		                                                FROM PROJECT PRJ
+		                                                LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+		                                                LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+		                                                LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+		                                                WHERE SYSDATE > REC.PRJ_END AND AP.PIN_NO = #{pinNo}
+		                                                                                                         )
+		                                        )	
+	</select>
+	
+	<!-- 프로젝트 이탈 및 닫기 제재 기간 판별 -->
+	<select id="reguMemOut" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+	    FROM MEMBER_OUT MO
+	    LEFT JOIN FINAL FN ON MO.FINAL_NO = FN.FINAL_NO
+	    LEFT JOIN FIRST_CK FS ON FN.FIRST_CK_NO = FS.FIRST_CK_NO
+	    LEFT JOIN APPLY AP ON FS.APPLY_NO = AP.APPLY_NO
+	    LEFT JOIN RECRUIT_POS RP ON AP.RECRUIT_POS_NO = RP.RECRUIT_POS_NO
+	    LEFT JOIN RECRUIT REC ON RP.RECRUIT_NO = REC.RECRUIT_NO
+	    LEFT JOIN PROJECT PRJ ON REC.RECRUIT_NO = PRJ.RECRUIT_NO
+	    WHERE AP.PIN_NO = #{pinNo} AND MO.OUT_DATE + 14 > SYSDATE
+	</select>
+	
+	<select id="reguTeamOut" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+	    FROM PROJECT_STOP PS
+	    LEFT JOIN PROJECT PRJ ON PS.PRJ_NO = PRJ.PRJ_NO
+	    LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+	    LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+	    LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+	    WHERE AP.PIN_NO = #{pinNo} AND PS.STOP_DATE + 14 > SYSDATE
+	</select>
+	
+	<!-- 중복 제재 방지 개인이탈, 팀닫기 사이  -->
+	<select id="twiceReguException" resultType="java.lang.Integer">
+		SELECT COUNT(REC.RECRUIT_NO) AS COUNT
+	    FROM PROJECT_STOP PS
+	    LEFT JOIN PROJECT PRJ ON PS.PRJ_NO = PRJ.PRJ_NO
+	    LEFT JOIN RECRUIT REC ON PRJ.RECRUIT_NO = REC.RECRUIT_NO
+	    LEFT JOIN RECRUIT_POS RP ON REC.RECRUIT_NO = RP.RECRUIT_NO
+	    LEFT JOIN APPLY AP ON RP.RECRUIT_POS_NO = AP.RECRUIT_POS_NO
+	    WHERE AP.PIN_NO = #{pinNo} AND PS.STOP_DATE + 14 > SYSDATE
+	                           	   AND REC.RECRUIT_NO IN (SELECT REC.RECRUIT_NO
+                                                          FROM MEMBER_OUT MO
+                                                          LEFT JOIN FINAL FN ON MO.FINAL_NO = FN.FINAL_NO
+                                                          LEFT JOIN FIRST_CK FS ON FN.FIRST_CK_NO = FS.FIRST_CK_NO
+                                                          LEFT JOIN APPLY AP ON FS.APPLY_NO = AP.APPLY_NO
+                                                          LEFT JOIN RECRUIT_POS RP ON AP.RECRUIT_POS_NO = RP.RECRUIT_POS_NO
+                                                          LEFT JOIN RECRUIT REC ON RP.RECRUIT_NO = REC.RECRUIT_NO
+                                                          LEFT JOIN PROJECT PRJ ON REC.RECRUIT_NO = PRJ.RECRUIT_NO
+                                                          WHERE AP.PIN_NO = #{pinNo})
+	</select>
+	
+	
+</mapper>

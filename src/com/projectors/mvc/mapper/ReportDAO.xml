@@ -19,9 +19,9 @@
 		FROM REGULATION_PERIOD
 	</select>
 	
-	<!-- 신고 된 동일한 공고/댓글/지원/쪽지 가 있는지 확인 -->
-	<select id="samePostNo" resultType="com.projectors.mvc.dto.ReportDTO">
-		SELECT REP_RECRUIT_NO
+	<!-- 신고 된 동일한 공고가 있는지 확인 -->
+	<select id="samePostNo" resultType="java.lang.String">
+		SELECT REP_RECRUIT_NO as repNo
 		FROM REP_RECRUIT
 		WHERE RECRUIT_NO = #{postNo}
 	</select>

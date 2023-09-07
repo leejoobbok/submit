@@ -1,5 +1,7 @@
 package com.projectors.mvc.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -65,7 +67,7 @@ public class AdminReportController
 		
 		return result;
 	}
-	
+/*	-- 원본
 	//-- 공고신고 처리 insert
 	@RequestMapping (value = "/clearManageReport.action", method = RequestMethod.GET)
 	public String clearManageReoprt(@RequestParam(value = "reguNo", required=false) String reguNo,
@@ -120,8 +122,90 @@ public class AdminReportController
 
 		return result;
 	}
+*/	
+	//-- 공고신고 처리 insert
+	@RequestMapping (value = "/clearManageReport.action", method = RequestMethod.GET)
+	public String clearManageReoprt(HttpServletRequest request)
+	{
+		String result = "redirect:loginForm.action";
+
+		HttpSession session = request.getSession();
+		if (session.getAttribute("adminNo")!=null)
+		{
+			String postNo = request.getParameter("postNo");
+
+			String repNo = request.getParameter("repNo");
+			String reguNo = request.getParameter("reguNo");
+			String reguPeriodNo = request.getParameter("reguPeriodNo");
+
+			System.out.println("postNo : " + postNo);
+			System.out.println("repNo : " + repNo);
+			System.out.println("reguNo : " + reguNo);
+			System.out.println("reguPeriodNo : " + reguPeriodNo);
+			
+			IReportDAO dao = sqlSession.getMapper(IReportDAO.class);
+
+			// 동일한 공고 번호가 있는 신고번호들 찾기
+			ArrayList<String> samePostNo = new ArrayList<String>();
+			samePostNo = dao.samePostNo(postNo);
+			
+			System.out.println(samePostNo);
+
+			for (String reportNo : samePostNo)
+			{
+				ReportDTO dto = new ReportDTO();
+				
+				dto.setAdminPinNo((String)session.getAttribute("pinNo"));
+				dto.setRepNo(reportNo);
+				dto.setReguNo(reguNo);
+				dto.setReguPeriodNo(reguPeriodNo);
+				
+				dao.clearManageReport(dto);
+			}
+
+			result = "redirect:reportRecruit.action";
+		}
+		
+		return result;
+	}
 	
-	
+	//-- 공고신고 반려
+	@RequestMapping (value = "/rejectManageReport.action", method = RequestMethod.GET)
+	public String rejectManageReport(HttpServletRequest request)
+	{
+		String result = "redirect:loginForm.action";
+		
+		HttpSession session = request.getSession();
+		if (session.getAttribute("adminNo")!=null)
+		{
+			String postNo = request.getParameter("postNo");
+
+			String repNo = request.getParameter("repNo");
+			
+			IReportDAO dao = sqlSession.getMapper(IReportDAO.class);
+
+			// 동일한 공고 번호가 있는 신고번호들 찾기
+			ArrayList<String> samePostNo = new ArrayList<String>();
+			samePostNo = dao.samePostNo(postNo);
+			
+			System.out.println(samePostNo);
+
+			for (String reportNo : samePostNo)
+			{
+				ReportDTO dto = new ReportDTO();
+				
+				dto.setAdminPinNo((String)session.getAttribute("pinNo"));
+				dto.setRepNo(reportNo);
+				
+				dao.rejectManageReport(dto);
+			}
+			
+			result = "redirect:reportRecruit.action";
+
+		}
+
+		return result;
+	}	
 	//-------------------------------------------------
 	
 	// ※ 지원서
