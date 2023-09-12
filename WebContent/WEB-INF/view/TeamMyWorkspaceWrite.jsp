@@ -33,7 +33,7 @@
 	  	 background-color: #c6fa96;
     }
     
-    #meetingDateIndex /* 회의 날짜제목 박스*/
+    #workDateIndex /* 작업 날짜제목 박스*/
     {
     	 top: 60px;  /* 고정 top 마진 */
 	  	 right: 334px; 
@@ -87,7 +87,7 @@
 		 height:460px;
 	}
 	
-	#meetingDate  /* 회의 날짜 선택란 */
+	#workDate  /* 작업 날짜 선택란 */
 	{
 	  position: absolute; /* 윈도우 조절해도 변화 없이 고정 (부모요소와 연관 제거)*/ 
 	  top: 60px;  			/* 고정 top 마진 */
@@ -162,7 +162,17 @@
     	var content = $('#content').val();
     	var workDate = $('#workDate').val();
     	
-    	window.location.href = "insertMyWork.action?title="+title+"&content="+content+"&workDate="+workDate;
+    	if(workDate == undefined) //유저가 작업일을 선택하지 않은 경우
+   		{
+	    	var workDateCheck = confirm("작업일을 선택하지 않으면 오늘 날짜로 등록됩니다. 이대로 등록하시겠습니까?");
+	        
+	        if (workDateCheck) {
+	        	
+	        	workDate = null; 
+	            window.location.href = "insertMyWork.action?title="+title+"&content="+content+"&workDate="+workDate;
+	        }
+        }
+    	
     }
 </script>
 
@@ -201,7 +211,7 @@
 					<div id="titleIndex" class="smallTitleBox">제목</div>
 					<input type="text" id="title" name="title"  placeholder="제목 입력">
 					
-					<div id="meetingDateIndex" class="smallTitleBox">작업일</div>
+					<div id="workDateIndex" class="smallTitleBox">작업일</div>
 					<input type="date" name="workDate" id="workDate"></input>
 					
 					<textarea name="content" id="content"  placeholder="내용 입력"></textarea>

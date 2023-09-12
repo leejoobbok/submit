@@ -5,7 +5,8 @@
 <mapper namespace="com.projectors.mvc.dao.ITeamMyWorkspaceDAO">
 
 <select id="getList" resultType="com.projectors.mvc.dto.TeamMyWorkspaceDTO">
-	SELECT SUBSTR(WORKSPACE_NO,3), TITLE, WORK_DATE, CREATED_DATE  
+	SELECT SUBSTR(WORKSPACE_NO,3) workspaceNo, TITLE title
+	, WORK_DATE workDate, CREATED_DATE createdDate  
 	FROM WORKSPACE
 	WHERE FINAL_NO = 'FN1'   <!-- 임시 정적 구성 -->
 	ORDER BY WORK_DATE DESC  <!-- 작업일 최신순 정렬 -->
@@ -23,7 +24,7 @@
 	     , 'FN1'  <!-- 작성자의 최종합류번호 (임시 정적구성)  -->
 	     , #{title}
 	     , #{content}
-	     , #{workDate}
+	     , NVL(#{workDate},SYSDATE)
 	     , SYSDATE)
 </insert>
 

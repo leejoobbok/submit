@@ -13,7 +13,7 @@
 	       <!-- , #{fileUrl} -->
 	        , null   <!-- (임시) 첨부파일 없음 -->
 	        , SYSDATE
-	        , #{meetingDate})
+	        , NVL(#{meetingDate},SYSDATE))
 </insert>
 
 <update id="modify">
