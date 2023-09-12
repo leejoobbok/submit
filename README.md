@@ -2,7 +2,7 @@
 submit_final
 
 # [도메인]
-http://175.117.84.27:8090/projectors/projectorsmain.action
+http://localhost:8090/FinalProject001/projectorsmain.action
 
 # [프로젝트 요약]
 -설명
